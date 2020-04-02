@@ -19,7 +19,7 @@ For example::
 	OG0008594: GCF_001618325|2406|Small_toxic_polypeptide_LdrD|NZ_CP015069.1|2607133|2607240 GCF_001663475|366|Small_toxic_polypeptide_LdrD|NZ_CP015159.1|380042|380149
 
 Generating of the graph structure
--------------------------------------
+---------------------------------
 
 When orthology groups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
 
