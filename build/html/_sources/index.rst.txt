@@ -19,6 +19,7 @@ Genome Complexity Browser MANUAL
 	interface
 	usecases
 	standalone
+	FAQ
 
 Indices and tables
 ==================
