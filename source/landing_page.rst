@@ -5,8 +5,10 @@ Genome Complexity Browser
 GCB is created to analyse variability of prokaryote or viral genomes.
 
 Graph-based representation of gene neigbourhood is used to:
+
  - make compact visualization of genome changes
  - evaluate geneome variability
+
 
 .. image:: img/scheme_of_things.png
         :align:   center
