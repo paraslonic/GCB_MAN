@@ -15,7 +15,7 @@ Graph-based representation of gene neigbourhood is used to:
 Local genome variability is estimated as the number of paths in the graph-based represention of the genome region. We call it complexity.
 Complexity profiles reveal hot-spots of genome variability, for most of genomes due to horizontal gene transfer events, and cold regions with little changes in gene order.
 
-Graph-based visualization may help answer questions regarding conservativity of gene context, diversity of genes present in particular loci. 
+Graph-based visualization may help answer questions regarding gene context and diversity of genes in particular loci. 
 
 This server contains precaluclated data for 143 prokaryote species. Complete list of species and strains can be found here.
 Tutorials and documentation can be found on RTFM.
