@@ -8,18 +8,10 @@ Command-line scripts are provided to: calculate complexity profile, generate sub
 .. image:: img/alone/scheme.png
 	:align: center
 
-Requirements
-################
-	* snakemake
-	* python3 with libraries:
-		*	biopython 
-		*	gene-graph-lib
-		* ???
-	* OrthoFinder
-	* prokka
+Installation
+------------
 
-The best way to get ready for the analysis is to use conda. 
-If you have no conda in your system, start with installing it: https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
+...
 
 Orthology group inference
 ##########################
@@ -64,13 +56,13 @@ Generating of the graph structure
 Graph structure is stored in text file with sif format, and in database
 When orthogroups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
 
-	python3 orthofinder_parse.py -i [path to txt file with orthogroups] -o [path and name prefix for output files]
+	python3 parse_og.py  -i [path to txt file with orthogroups] -o [path and name prefix for output files]
 
 For example::
 
-	python3 orthofinder_parse.py -i ~/data/Mycoplasma/Results/Orthogroups.txt -o ~/data/outputs/Mycoplasma/graph
+	python3 parse_og.py  -i ~/data/Mycoplasma/Results/Orthogroups.txt -o ~/data/outputs/Mycoplasma/graph
 
-Output files:
+Main output files:
 
 	- :file:`graph.sif` - all edges list of the genomes graph
 	- :file:`graph.db` - SQLite database with all parsed information
