@@ -9,6 +9,11 @@ Standalone version should be used when the user wants to work with a custom set 
 .. image:: img/alone/scheme.png
 	:align: center
 
+Installation
+------------
+
+...
+
 Orthology group inference
 --------------------------
 
@@ -23,13 +28,13 @@ Generating of the graph structure
 
 When orthology groups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
 
-	python3 orthofinder_parse.py -i [path to txt file with orthogroups] -o [path and name prefix for output files]
+	python3 parse_og.py  -i [path to txt file with orthogroups] -o [path and name prefix for output files]
 
 For example::
 
-	python3 orthofinder_parse.py -i ~/data/Mycoplasma/Results/Orthogroups.txt -o ~/data/outputs/Mycoplasma/graph
+	python3 parse_og.py  -i ~/data/Mycoplasma/Results/Orthogroups.txt -o ~/data/outputs/Mycoplasma/graph
 
-Output files:
+Main output files:
 
 	- :file:`graph.sif` - all edges list of the genomes graph
 	- :file:`graph.db` - SQLite database with all parsed information
