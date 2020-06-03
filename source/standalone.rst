@@ -2,26 +2,67 @@
 Standalone version to add custom genome sets
 ==============================================
 
-GCB can be used in three main ways: 1) as a web server with a precalculated set of genomes; 2) standalone application with browser-based GUI; 3) set of command-line scripts.
-
-Standalone version should be used when the user wants to work with a custom set of genomes. Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.
+Standalone version should be used when the user wants to work with a custom set of genomes. 
+Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.
 
 .. image:: img/alone/scheme.png
 	:align: center
 
+Requirements
+################
+	* snakemake
+	* python3 with libraries:
+		*	biopython 
+		*	gene-graph-lib
+		* ???
+	* OrthoFinder
+	* prokka
+
+The best way to get ready for the analysis is to use conda. 
+If you have no conda in your system, start with installing it: https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
+
 Orthology group inference
---------------------------
+##########################
 
-To add a custom set of genomes orthology groups should be inferred first. We provide snakemake script: https://github.com/paraslonic/orthosnake to accomplish this task. It takes fasta formatted genome sequences as input. Then gene annotation with prokka  tool of each genome is performed. Genbank files then converted to fasta formatted amino acid protein sequences with a custom python3 script. This script inserts special information about genes in fasta headers, namely: genome file name, numeric id, product name, contig, start, end (for example, ``>GCF_000007445|4|Threonine_synthase|NC_004431.1|4445|5731``). Then these files are used to infer orthology groups with OrthoFinder tool. The resulting file with orthology groups (OG) contains information about each OG in the following format: ``<og id>: <gene1> <gene2> …``
+Orthogroup inference is the first step in the standalone analysis.
+We recomend using our orthosnake pipeline to perfrom orthogroup inference, because GCB requires some special formating of the files. If you want to perform this step without orthosnake pipeline, you will find the specifications of the formats used HHEERREE.
 
-For example::
+Orthosnake pipeline
+--------------------
+*INPUT: Fasta-formated files with .fna extension, one file per genome.
+*OUTPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
 
-	OG0008594: GCF_001618325|2406|Small_toxic_polypeptide_LdrD|NZ_CP015069.1|2607133|2607240 GCF_001663475|366|Small_toxic_polypeptide_LdrD|NZ_CP015159.1|380042|380149
+Steps: 
+
+	1. Clone or download orthosnake GIT repository: https://github.com/paraslonic/orthosnake
+	2. Put fasta-formated genome files in fna folder of the orthosnake folder. 
+	3. Rut snakemake with appropriate settings
+
+Example:
+
+.. code-block:: bash
+   git clone git@github.com:paraslonic/orthosnake.git
+   cd orthosnake
+   cp test_fna/* fna # copy test fasta files with three plasmids
+   snakemake -j 5 -k --latency-wait 120 --use-conda
+
+If genome files have extension other than .fna please rename them, i.e. with following command:
+`for i in fna/*.fasta; do mv $i fna/$(basename $i .fasta).fna; done`
+
+### Algorightm
+
+* Fasta files headers are modified to be consistent with Prokka:  
+  * if header contains symbols other than alphanumericals and `_` they are converted to `_`
+  * if header is longer than 20 symbols it is cropped to first 18 symbols and dots are added to the end (i.e. `gi|15829254|ref|NC_002695.1` becomes `gi|15829254|ref|NC..`)
+* Annotation with Prokka 
+* Amino acid fasta files are generated from genebank files; gene location and product information are listed in headers.
+* Orthogroups are inferred with OrthoFinder.
 
 Generating of the graph structure
----------------------------------
+##################################
 
-When orthology groups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
+Graph structure is stored in text file with sif format, and in database
+When orthogroups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
 
 	python3 orthofinder_parse.py -i [path to txt file with orthogroups] -o [path and name prefix for output files]
 
@@ -62,7 +103,14 @@ Output files for each contig in the reference genome:
 	:file:`all_bridges_contig_n.txt` - this file contains information about the number of deviating paths between each pair of nodes in the reference genome
 
 
+PODVAL
+-------------------
 
+Then gene annotation with prokka  tool of each genome is performed. Genbank files then converted to fasta formatted amino acid protein sequences with a custom python3 script. This script inserts special information about genes in fasta headers, namely: genome file name, numeric id, product name, contig, start, end (for example, ``>GCF_000007445|4|Threonine_synthase|NC_004431.1|4445|5731``). Then these files are used to infer orthology groups with OrthoFinder tool. The resulting file with orthology groups (OG) contains information about each OG in the following format: ``<og id>: <gene1> <gene2> …``
+
+For example::
+
+	OG0008594: GCF_001618325|2406|Small_toxic_polypeptide_LdrD|NZ_CP015069.1|2607133|2607240 GCF_001663475|366|Small_toxic_polypeptide_LdrD|NZ_CP015159.1|380042|380149
 
 
 
