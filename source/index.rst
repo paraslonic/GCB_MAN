@@ -3,21 +3,39 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Genome Complexity Browser MANUAL
+Genome Complexity Browser 
 ===================================
 
-.. image:: img/gcb_logo2.png
-	:alt: Logo
-	:align: center
-	:scale: 60 %
+Welcome to the Genome Complexity Browser (GCB) documentation.
+
+
+GCB performs:
+	- Visualization of gene neighborhoods in a graph-based format.
+	- Quantification of local genome variability. 
+
+.. figure:: img/scheme_of_things.png
+   :align: center
+
+The graph-based visualization of gene neighbourhoods may facilitate answering questions like:
+
+	- Is a gene (operon) located in the same location in all genomes? If not, then what alternative genes are present?
+	- Which parts of a gene set (operon) are conserved and which are variable? 
+	- Which genomes contain some particular combination of genes?
+
+	
+Local genome variability profile may be used to identify:
+	- Hotspots of horizontal gene transfer or other local gene rearrangement events. 
+	- Cold spots, regions of the genome with virtually no changes in the considered set of genomes.
+
+The GCB is available as a `web server <gcb.rcpcm.org>`_ and as a standalone application. 
+Web server contains data for 143 prokaryote species. To perform an analysis on a custom set of genomes, use the standalone version (basic command-line skills will be needed). 
 
 .. toctree::
-	:maxdepth: 2
+	:maxdepth: 3
 	:caption: Contents:
 
 	general
 	interface
-	usecases
 	standalone
 	FAQ
 
