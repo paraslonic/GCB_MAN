@@ -5,7 +5,8 @@ Standalone version
 Roadmap
 ########
 
-Standalone version should be used when the user wants to work with a custom set of genomes. Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.
+Standalone version should be used when the user wants to work with a custom set of genomes. 
+Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.
 
 .. image:: img/alone/scheme.png
 	:align: center
@@ -21,6 +22,7 @@ Orthogroup inference
 
 Orthogroup inference is the first step in the standalone analysis.
 We recomend using our `orthosnake <https://github.com/paraslonic/orthosnake>`_ pipeline to perfrom orthogroup inference, because GCB requires some special formating of the files.
+
 
 Orthosnake pipeline
 --------------------
@@ -57,7 +59,8 @@ If genome files have extension other than .fna please rename them, i.e. with fol
 Building a graph
 -----------------
 
-When orthology groups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
+Graph structure is stored in text file with sif format, and in database
+When orthogroups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
 
 	python3 parse_og.py  -i [path to txt file with orthogroups] -o [path and name prefix for output files]
 
@@ -100,6 +103,14 @@ Output files for each contig in the reference genome:
 Subgraph visualization
 -----------------------
 
+PODVAL
+-------------------
+
+Then gene annotation with prokka  tool of each genome is performed. Genbank files then converted to fasta formatted amino acid protein sequences with a custom python3 script. This script inserts special information about genes in fasta headers, namely: genome file name, numeric id, product name, contig, start, end (for example, ``>GCF_000007445|4|Threonine_synthase|NC_004431.1|4445|5731``). Then these files are used to infer orthology groups with OrthoFinder tool. The resulting file with orthology groups (OG) contains information about each OG in the following format: ``<og id>: <gene1> <gene2> …``
+
+For example::
+
+	OG0008594: GCF_001618325|2406|Small_toxic_polypeptide_LdrD|NZ_CP015069.1|2607133|2607240 GCF_001663475|366|Small_toxic_polypeptide_LdrD|NZ_CP015159.1|380042|380149
 
 
 
