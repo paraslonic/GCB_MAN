@@ -6,8 +6,9 @@
 Genome Complexity Browser 
 ===================================
 
-Welcome to the Genome Complexity Browser (GCB) documentation.
+Welcome to the Genome Complexity Browser (GCB) documentation. 
 
+GCB is created to analyse variability in hundreds of prokaryote or viral genomes simultaniously.
 
 GCB performs:
 	- Visualization of gene neighborhoods in a graph-based format.
@@ -27,8 +28,8 @@ Local genome variability profile may be used to identify:
 	- Hotspots of horizontal gene transfer or other local gene rearrangement events. 
 	- Cold spots, regions of the genome with virtually no changes in the considered set of genomes.
 
-The GCB is available as a `web server <gcb.rcpcm.org>`_ and as a standalone application. 
-Web server contains data for 143 prokaryote species. To perform an analysis on a custom set of genomes, use the standalone version (basic command-line skills will be needed). 
+The GCB is available as a `web server <gcb.rcpcm.org>`_ and as a `standalone application <https://github.com/DNKonanov/geneGraph>`_. 
+Web server contains precalculated data for 143 prokaryote species. Standalone version allows to analyze a custom set of genomes (basic command-line skills will be needed). 
 
 .. toctree::
 	:maxdepth: 3
