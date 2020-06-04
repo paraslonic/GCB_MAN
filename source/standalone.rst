@@ -24,9 +24,10 @@ Orthogroup inference is the first step in the standalone analysis.
 We recomend using our `orthosnake <https://github.com/paraslonic/orthosnake>`_ pipeline to perfrom orthogroup inference, because GCB requires some special formating of the files.
 
 
-Orthosnake pipeline
---------------------
-*INPUT: Fasta-formated files with .fna extension, one file per genome.
+**Orthosnake pipeline**
+
+*INPUT: Fasta-formated files with .fna extension, one file per genome*
+
 *OUTPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
 
 Steps: 
