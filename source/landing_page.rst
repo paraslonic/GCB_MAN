@@ -29,10 +29,7 @@ Google group is available to ask questions.
 
 Here you can find graph-based representation of some operons and genome islands with comments.
 
-GCB is opensource and can freely used without any warranty on the basis of BSD licence.
-
-Preprint is available. Please cite it when reporting results obtained with GCB.
-
+Our tool is opensource and can freely be used without any warranty on the basis of `MIT License <https://opensource.org/licenses/MIT>`_.
 
 
 
