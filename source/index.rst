@@ -31,6 +31,11 @@ Local genome variability profile may be used to identify:
 The GCB is available as a `web server <gcb.rcpcm.org>`_ and as a `standalone application <https://github.com/DNKonanov/geneGraph>`_. 
 Web server contains precalculated data for 143 prokaryote species. Standalone version allows to analyze a custom set of genomes (basic command-line skills will be needed). 
 
+Our tool is opensource and can freely be used without any warranty on the basis of GNU General Public License v3.0.
+
+Preprint is `available <https://www.biorxiv.org/content/10.1101/713123v1>`_ . Please cite it when reporting results obtained with the GCB.
+
+
 .. toctree::
 	:maxdepth: 3
 	:caption: Contents:
