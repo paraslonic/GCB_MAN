@@ -55,9 +55,11 @@ Orthosnake pipeline performs the following steps:
 	* Fasta headers are modified, to satisfy the requirement of the Prokka:  
 		* symbols other than alphanumericals and `_` are converted to `_`
 		* if header is longer than 20 symbols, it is cropped to the first 18 symbols, and dots are added to the end (e.g., ``gi|15829254|ref|NC_002695.1`` becomes ``gi|15829254|ref|NC..``)
-	* Annotation with Prokka 
-	* Genebank files converted to amino acid fasta files, with location and product information in headers (format: <genome_name>|<numerical_id>|<start>|<end>|<product>).
+	* Annotation with Prokka.
+	* Genebank files converted to amino acid fasta files.
 	* Orthogroups are inferred with OrthoFinder.
+
+When amino acid fasta files are generated from genebank files, information regarding location and product is included in headers in the following format: genome_name|numerical_id|start|end|product. Please note this if you want to perform orthogroups inference without using orthosnake.
 
 Building a graph and complexity estimation with a single command
 -----------------------------------------------------------------
@@ -67,27 +69,37 @@ Building a graph and complexity estimation with a single command
 
 To perform the basic analysis, run::
 
-	python3 gg.py  -i [orthogroups file] -o [path and name prefix for output files] --reference [name of the reference genome]
+	python3 gg.py -i [orthogroups file] -o [output] --reference [name of the reference genome]
 
-parameters:
+Parameters:
 
-	``-i`` -- path to orthogroups file in OrthoFinder format. Gene names should be in the same format as that of orthosnake ()
-	``--reference`` --	name of the reference genome (coincides with the filename without extension) 
+	``-i`` -- path to orthogroups file in OrthoFinder format.
+
+	``-o`` --	path and name prefix for output files
+
+	``--reference`` --	name of the reference genome (its filename without extension), used for complexity estimation. This parameter can be skipped, in this case, the complexity values for all genomes in the set will be estimated (this can take a lot of time). 
+	
+Optional parameters:
+
+	``--window``  -- size of the window used in the complexity estimation (default is 20). Only the paths inside the window increase the value of complexity.
+
+  	``--genomes_list`` -- a text file containing the names of the genomes that will be used to calculate the complexity. Useful for analysis of parts of genomes, such as phylogenetic tree clades, for their subsequent comparison.
+
+	``--coalign`` -- a binary value (true/false) that determines whether to perform the step of selecting the optimal genomes orientation. It can take a lot of time when using a large number of draft genomes (5 hours for 1000 draft genomes).
+
+Advanced complexity estimation algorithm settings (practically not used):
+
+	``--iterations`` --  number of iterations in algorithm (default is 500)
+                        
+	``--min_depth`` -- minimum length of deviating path (default is 0)
+
+	``--max_depth`` -- maximum length of deviating path (default is inf)
+ 
 
 
-to indicate a reference genome use its 
 
-To Name of the refence genome is the filename 
-subset of genomes
 hotspots
 complexity one reference or all
-
-
-
-
-
-
-
 
 
 
@@ -156,12 +168,6 @@ Output files for each contig in the reference genome:
 
 	:file:`all_bridges_contig_n.txt` - this file contains information about the number of deviating paths between each pair of nodes in the reference genome
 
-
-
-Building a graph and complexity estimation with a single command
------------------------------------------------------------------
-
-gg.py
 
 
 PODVAL

@@ -91,29 +91,40 @@ We recomend using our <a class="reference external" href="https://github.com/par
 </dd>
 </dl>
 </li>
-<li><p>Annotation with Prokka</p></li>
-<li><p>Genebank files converted to amino acid fasta files, with location and product information in headers (format: &lt;genome_name&gt;|&lt;numerical_id&gt;|&lt;start&gt;|&lt;end&gt;|&lt;product&gt;).</p></li>
+<li><p>Annotation with Prokka.</p></li>
+<li><p>Genebank files converted to amino acid fasta files.</p></li>
 <li><p>Orthogroups are inferred with OrthoFinder.</p></li>
 </ul>
 </div></blockquote>
+<p>When amino acid fasta files are generated from genebank files, information regarding location and product is included in headers in the following format: genome_name|numerical_id|start|end|product. Please note this if you want to perform orthogroups inference without using orthosnake.</p>
 </div>
 <div class="section" id="building-a-graph-and-complexity-estimation-with-a-single-command">
 <h3>Building a graph and complexity estimation with a single command<a class="headerlink" href="#building-a-graph-and-complexity-estimation-with-a-single-command" title="Permalink to this headline">¶</a></h3>
 <p><em>INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format</em></p>
 <p><em>OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text)</em></p>
 <p>To perform the basic analysis, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">gg</span><span class="o">.</span><span class="n">py</span>  <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">orthogroups</span> <span class="n">file</span><span class="p">]</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">path</span> <span class="ow">and</span> <span class="n">name</span> <span class="n">prefix</span> <span class="k">for</span> <span class="n">output</span> <span class="n">files</span><span class="p">]</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">gg</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">orthogroups</span> <span class="n">file</span><span class="p">]</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>parameters:</p>
+<p>Parameters:</p>
 <blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">-i</span></code> – path to orthogroups file in OrthoFinder format. Gene names should be in the same format as that of orthosnake ()
-<code class="docutils literal notranslate"><span class="pre">--reference</span></code> –      name of the reference genome (coincides with the filename without extension)</p>
+<div><p><code class="docutils literal notranslate"><span class="pre">-i</span></code> – path to orthogroups file in OrthoFinder format.</p>
+<p><code class="docutils literal notranslate"><span class="pre">-o</span></code> –       path and name prefix for output files</p>
+<p><code class="docutils literal notranslate"><span class="pre">--reference</span></code> –      name of the reference genome (its filename without extension), used for complexity estimation. This parameter can be skipped, in this case, the complexity values for all genomes in the set will be estimated (this can take a lot of time).</p>
 </div></blockquote>
-<p>to indicate a reference genome use its</p>
-<p>To Name of the refence genome is the filename
-subset of genomes
-hotspots
+<p>Optional parameters:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">--window</span></code>  – size of the window used in the complexity estimation (default is 20). Only the paths inside the window increase the value of complexity.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--genomes_list</span></code> – a text file containing the names of the genomes that will be used to calculate the complexity. Useful for analysis of parts of genomes, such as phylogenetic tree clades, for their subsequent comparison.</p>
+<p><code class="docutils literal notranslate"><span class="pre">--coalign</span></code> – a binary value (true/false) that determines whether to perform the step of selecting the optimal genomes orientation. It can take a lot of time when using a large number of draft genomes (5 hours for 1000 draft genomes).</p>
+</div></blockquote>
+<p>Advanced complexity estimation algorithm settings (practically not used):</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">--iterations</span></code> –  number of iterations in algorithm (default is 500)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--min_depth</span></code> – minimum length of deviating path (default is 0)</p>
+<p><code class="docutils literal notranslate"><span class="pre">--max_depth</span></code> – maximum length of deviating path (default is inf)</p>
+</div></blockquote>
+<p>hotspots
 complexity one reference or all</p>
 </div>
 </div>
@@ -174,10 +185,6 @@ Separate full subgraph generation</p>
 <div><p><code class="file docutils literal notranslate"><span class="pre">all_bridges_contig_n.txt</span></code> - this file contains information about the number of deviating paths between each pair of nodes in the reference genome</p>
 </div></blockquote>
 </div>
-<div class="section" id="id4">
-<h3>Building a graph and complexity estimation with a single command<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>gg.py</p>
-</div>
 <div class="section" id="podval">
 <h3>PODVAL<a class="headerlink" href="#podval" title="Permalink to this headline">¶</a></h3>
 <p>Then gene annotation with prokka  tool of each genome is performed. Genbank files then converted to fasta formatted amino acid protein sequences with a custom python3 script. This script inserts special information about genes in fasta headers, namely: genome file name, numeric id, product name, contig, start, end (for example, <code class="docutils literal notranslate"><span class="pre">&gt;GCF_000007445|4|Threonine_synthase|NC_004431.1|4445|5731</span></code>). Then these files are used to infer orthology groups with OrthoFinder tool. The resulting file with orthology groups (OG) contains information about each OG in the following format: <code class="docutils literal notranslate"><span class="pre">&lt;og</span> <span class="pre">id&gt;:</span> <span class="pre">&lt;gene1&gt;</span> <span class="pre">&lt;gene2&gt;</span> <span class="pre">…</span></code></p>
@@ -209,7 +216,6 @@ Separate full subgraph generation</p>
 <li><a class="reference internal" href="#id1">Roadmap</a></li>
 <li><a class="reference internal" href="#building-a-graph">Building a graph</a></li>
 <li><a class="reference internal" href="#complexity-estimation">Complexity estimation</a></li>
-<li><a class="reference internal" href="#id4">Building a graph and complexity estimation with a single command</a></li>
 <li><a class="reference internal" href="#podval">PODVAL</a></li>
 </ul>
 </li>
