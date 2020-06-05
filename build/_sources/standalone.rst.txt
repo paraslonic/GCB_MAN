@@ -85,34 +85,6 @@ Additional files for optional user analysis:
 
 In a text ``graph.sif`` file, each line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. SQLite database ``graph.db`` file contains same information, and can be supplemented with complexity values in the course of further analysis.  
 
-
-To generate a subgraph in a sif-format, run following command::
-
-	python generate_subgraph.py -i graph.sif -o subgraph --reference [name of reference genome] --start [name of start node] --end [name of end node]
-
-This command generates subgraph `subgraph.sif`. 
-
-Additional parameters:
-* ` --window ` - number of nodes, added to left and right side of refernce chain (default 20)
-* ` --depth ` - maximum length of deviating paths, which will be added to the subgraph {default is the length of the reference chain)
-* ` --tails ` - if deviating path too long, it will be replaced by left and right "tails". This parameter is tails length (default 5)
-* ` --names_list ` - path to file with list of names for subgraph generating (default all names from *.sif will be used)
-
-To plot th
-
-`python plot_subgraph.py -i subgraph.sif -o subgrah_img`
-
-This script generate:
-* subgraph_img.ps file as image and 
-* subgraph_img.dot file with DOT description of subgraph (DOT is popular graph structure description language)
-
-Additional parameters:
-* ` --freq_min` - minimal edge frequency to draw. Edge frequency is number of genomes with this edge.
-* ` --da` - legacy parameter, it's not recommended to use. Draws all subgraph edges in any case, but edges wih frequency < `freq_min` do not influence to subgraph layout.
-
-
-
-
 Complexity estimation
 -------------------------
 

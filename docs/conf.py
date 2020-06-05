@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'GCB_MAN'
-copyright = '2020, ADD'
-author = 'ADD'
+project = 'Genome Complexity Browser'
+copyright = '2020, A. Manolov, D. Konanov, D. Fedorov, R. Vereshchagin, E. Ilina'
+author = 'A. Manolov, D. Konanov'
 
 
 # -- General configuration ---------------------------------------------------
@@ -48,3 +48,5 @@ html_theme = 'classic'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+master_doc = 'index'

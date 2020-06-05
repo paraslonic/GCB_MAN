@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Standalone version &#8212; GCB_MAN  documentation</title>
+    <title>Standalone version &#8212; Genome Complexity Browser  documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -31,7 +31,7 @@
         <li class="right" >
           <a href="interface.html" title="GUI description"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">GCB_MAN  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Genome Complexity Browser  documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -125,24 +125,6 @@ We recomend using our <a class="reference external" href="https://github.com/par
 </ul>
 </div></blockquote>
 <p>In a text <code class="docutils literal notranslate"><span class="pre">graph.sif</span></code> file, each line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. SQLite database <code class="docutils literal notranslate"><span class="pre">graph.db</span></code> file contains same information, and can be supplemented with complexity values in the course of further analysis.</p>
-<p>To generate a subgraph in a sif-format, run following command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">generate_subgraph</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="n">graph</span><span class="o">.</span><span class="n">sif</span> <span class="o">-</span><span class="n">o</span> <span class="n">subgraph</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span> <span class="o">--</span><span class="n">start</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">start</span> <span class="n">node</span><span class="p">]</span> <span class="o">--</span><span class="n">end</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">end</span> <span class="n">node</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>This command generates subgraph <cite>subgraph.sif</cite>.</p>
-<p>Additional parameters:
-* ` –window ` - number of nodes, added to left and right side of refernce chain (default 20)
-* ` –depth ` - maximum length of deviating paths, which will be added to the subgraph {default is the length of the reference chain)
-* ` –tails ` - if deviating path too long, it will be replaced by left and right “tails”. This parameter is tails length (default 5)
-* ` –names_list ` - path to file with list of names for subgraph generating (default all names from <a href="#id1"><span class="problematic" id="id2">*</span></a>.sif will be used)</p>
-<p>To plot th</p>
-<p><cite>python plot_subgraph.py -i subgraph.sif -o subgrah_img</cite></p>
-<p>This script generate:
-* subgraph_img.ps file as image and
-* subgraph_img.dot file with DOT description of subgraph (DOT is popular graph structure description language)</p>
-<p>Additional parameters:
-* ` –freq_min` - minimal edge frequency to draw. Edge frequency is number of genomes with this edge.
-* ` –da` - legacy parameter, it’s not recommended to use. Draws all subgraph edges in any case, but edges wih frequency &lt; <cite>freq_min</cite> do not influence to subgraph layout.</p>
 </div>
 <div class="section" id="complexity-estimation">
 <h3>Complexity estimation<a class="headerlink" href="#complexity-estimation" title="Permalink to this headline">¶</a></h3>
@@ -153,7 +135,7 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <dl>
 <dt>Additional parameters:</dt><dd><p>–window - sliding window size (default 20)</p>
 <p>–iterations - number of iterations in probabilistic method (default 500)</p>
-<p>–genomes_list - path to file with a list of names which will be used to create a graph (default all strains from <a href="#id3"><span class="problematic" id="id4">*</span></a>.sif will be used)</p>
+<p>–genomes_list - path to file with a list of names which will be used to create a graph (default all strains from <a href="#id1"><span class="problematic" id="id2">*</span></a>.sif will be used)</p>
 <p>–min_depth, –max_depth - minimum and maximum depth of generated paths in the graph (default from 0 to inf)</p>
 <p>–save_db - path to the database, created by orthfinder_parse.py (default data will not be saved to db, only to txt). It’s necessary to use this parameter if you want to use this complexity profile in the stand-alone browser-based GCB application.</p>
 </dd>
@@ -240,11 +222,11 @@ We recomend using our <a class="reference external" href="https://github.com/par
         <li class="right" >
           <a href="interface.html" title="GUI description"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">GCB_MAN  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Genome Complexity Browser  documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, ADD.
+        &#169; Copyright 2020, A. Manolov, D. Konanov, D. Fedorov, R. Vereshchagin, E. Ilina.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     </div>
   </body>
