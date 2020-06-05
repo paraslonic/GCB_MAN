@@ -8,7 +8,7 @@ Roadmap
 Standalone version should be used when the user wants to work with a custom set of genomes. 
 Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.
 
-.. image:: img/alone/scheme.png
+.. image:: img/alone/standalone_scheme_hor2_2.png
 	:align: center
 
 Command-line tools
@@ -84,43 +84,6 @@ Additional files for optional user analysis:
 	- :file:`graph_genes.sif` - genes (nodes) from all genomes, with coordinates and Prokka annotations.
 
 In a text ``graph.sif`` file, each line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. SQLite database ``graph.db`` file contains same information, and can be supplemented with complexity values in the course of further analysis.  
-
-Subgraph construction and visualization
-----------------------------------------
-*INPUT: graph-based representation of genomes (sif-file)*
-
-*OUTPUT: graph-based representation of genomes (sif-file, graph visualization in PostScript or DOT fofrmat)*
-
-The graph representation allows compactly represent possible variants of the repertoire and the neigbourhood of genes in genomes. However, complete graph of all genomes will be too complicated for visualization, unless you are working with viruses. To explore a certain region of interest (gene, operon, genomic island), subgraphs can be generated. Subgraph is part of a total graph that represents some specific region of the reference genome. You may generate and visualize a subgraph with command-line tools described here, or  using a local GCB server.
-
-To generate subgraph, run following command::
-
-`python generate_subgraph.py -i graph.sif -o subgraph --reference [name of reference genome] --start [name of start node] --end [name of end node]`
-
-This command generates subgraph `subgraph.sif`, which is connected with START......END simple chain of nodes in the reference genome.
-
-Additional parameters:
-* ` --window ` - number of nodes, added to left and right side of refernce chain (default 20)
-* ` --depth ` - maximum length of deviating paths, which will be added to the subgraph {default is the length of the reference chain)
-* ` --tails ` - if deviating path too long, it will be replaced by left and right "tails". This parameter is tails length (default 5)
-* ` --names_list ` - path to file with list of names for subgraph generating (default all names from *.sif will be used)
-
-### Graph drawing
-
-Now we can run drawing of our mini-graph. Let's go to the `recombinatin_draw` directory in the geneGraph folder and type in terminal:
-
-`python plot_subgraph.py -i subgraph.sif -o subgrah_img`
-
-This script generate:
-* subgraph_img.ps file as image and 
-* subgraph_img.dot file with DOT description of subgraph (DOT is popular graph structure description language)
-
-Additional parameters:
-* ` --freq_min` - minimal edge frequency to draw. Edge frequency is number of genomes with this edge.
-* ` --da` - legacy parameter, it's not recommended to use. Draws all subgraph edges in any case, but edges wih frequency < `freq_min` do not influence to subgraph layout.
-
-
-
 
 Complexity estimation
 -------------------------
