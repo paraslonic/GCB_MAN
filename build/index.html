@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Genome Complexity Browser &#8212; GCB_MAN  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Main concepts" href="general.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="general.html" title="Main concepts"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">GCB_MAN  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="genome-complexity-browser">
+<h1>Genome Complexity Browser<a class="headerlink" href="#genome-complexity-browser" title="Permalink to this headline">¶</a></h1>
+<p>Welcome to the Genome Complexity Browser (GCB) documentation.</p>
+<p>GCB is created to analyse variability in hundreds of prokaryote or viral genomes simultaniously.</p>
+<dl class="simple">
+<dt>GCB performs:</dt><dd><ul class="simple">
+<li><p>Visualization of gene neighborhoods in a graph-based format.</p></li>
+<li><p>Quantification of local genome variability.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="figure align-center">
+<img alt="_images/scheme_of_things.png" src="_images/scheme_of_things.png" />
+</div>
+<p>The graph-based visualization of gene neighbourhoods may facilitate answering questions like:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Is a gene (operon) located in the same location in all genomes? If not, then what alternative genes are present?</p></li>
+<li><p>Which parts of a gene set (operon) are conserved and which are variable?</p></li>
+<li><p>Which genomes contain some particular combination of genes?</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Local genome variability profile may be used to identify:</dt><dd><ul class="simple">
+<li><p>Hotspots of horizontal gene transfer or other local gene rearrangement events.</p></li>
+<li><p>Cold spots, regions of the genome with virtually no changes in the considered set of genomes.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The GCB is available as a <a class="reference external" href="gcb.rcpcm.org">web server</a> and as a <a class="reference external" href="https://github.com/DNKonanov/geneGraph">standalone application</a>.
+Web server contains precalculated data for 143 prokaryote species. Standalone version allows to analyze a custom set of genomes (basic command-line skills will be needed).</p>
+<p>Preprint is <a class="reference external" href="https://www.biorxiv.org/content/10.1101/713123v1">available</a> . Please cite it when reporting results obtained with the GCB.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="general.html">Main concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general.html#graph-representation-of-genomes">Graph representation of genomes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#complexity-profile">Complexity profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#genome-complexity-browsing">Genome Complexity browsing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interface.html">GUI description</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#gui-elements">GUI elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#step-by-step-tutorials">Step-by-step tutorials</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="interface.html#complexity-analysis">Complexity analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interface.html#gene-neigbourhood-analysis">Gene neigbourhood analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interface.html#combined-analysis">Combined analysis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="standalone.html">Standalone version</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="standalone.html#roadmap">Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="standalone.html#command-line-tools">Command-line tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html#orthogroup-inference">Orthogroup inference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html#building-a-graph">Building a graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html#complexity-estimation">Complexity estimation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html#building-a-graph-and-complexity-estimation-with-a-single-command">Building a graph and complexity estimation with a single command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="standalone.html#podval">PODVAL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Genome Complexity Browser</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="general.html"
+                        title="next chapter">Main concepts</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="general.html" title="Main concepts"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">GCB_MAN  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, ADD.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

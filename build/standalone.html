@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Standalone version &#8212; GCB_MAN  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Frequently Asked Questions" href="FAQ.html" />
+    <link rel="prev" title="GUI description" href="interface.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Frequently Asked Questions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="interface.html" title="GUI description"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">GCB_MAN  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="standalone-version">
+<h1>Standalone version<a class="headerlink" href="#standalone-version" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="roadmap">
+<h2>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h2>
+<p>Standalone version should be used when the user wants to work with a custom set of genomes.
+Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.</p>
+<img alt="_images/standalone_scheme_hor2_2.png" class="align-center" src="_images/standalone_scheme_hor2_2.png" />
+</div>
+<div class="section" id="command-line-tools">
+<h2>Command-line tools<a class="headerlink" href="#command-line-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="orthogroup-inference">
+<h3>Orthogroup inference<a class="headerlink" href="#orthogroup-inference" title="Permalink to this headline">¶</a></h3>
+<p>Orthogroup inference is the first step in the standalone analysis.
+We recomend using our <a class="reference external" href="https://github.com/paraslonic/orthosnake">orthosnake</a> pipeline for inference of orthogroups, because GCB requires some special formating of the files.</p>
+<p><strong>Orthosnake pipeline</strong>
+<em>INPUT: Fasta-formated files with .fna extension, one file per genome</em></p>
+<p><em>OUTPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format</em></p>
+<p>Steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Clone or download orthosnake GIT repository: <a class="reference external" href="https://github.com/paraslonic/orthosnake">https://github.com/paraslonic/orthosnake</a></p></li>
+<li><p>Put fasta-formated genome files in <code class="docutils literal notranslate"><span class="pre">fna</span></code> folder of the orthosnake folder.</p></li>
+<li><p>Rut snakemake with <code class="docutils literal notranslate"><span class="pre">--use-conda</span></code> and other appropriate options</p></li>
+</ol>
+</div></blockquote>
+<p>The following code will run the test dataset analysis</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paraslonic</span><span class="o">/</span><span class="n">orthosnake</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">orthosnake</span>
+<span class="n">cp</span> <span class="n">test_fna</span><span class="o">/*</span> <span class="n">fna</span> <span class="c1"># copy test fasta files with three plasmids</span>
+<span class="n">snakemake</span> <span class="o">-</span><span class="n">j</span> <span class="mi">4</span> <span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">conda</span>
+</pre></div>
+</div>
+<p>Here, we used snakemake with parameters specifying the number of available cores (<code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">4</span></code>), and using conda environments (<code class="docutils literal notranslate"><span class="pre">--use-conda</span></code>). During the first start of the pipeline, it will take several minutes to install the necessary programs into the conda environments.</p>
+<p>If genome files have extension, other than <code class="docutils literal notranslate"><span class="pre">.fna</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">*.fasta</span></code>) , please rename them. For example, to change the file extension from <code class="docutils literal notranslate"><span class="pre">.fasta</span></code> to <code class="docutils literal notranslate"><span class="pre">.fna</span></code>, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>for i in fna/*.fasta; do mv $i fna/$(basename $i .fasta).fna; done
+</pre></div>
+</div>
+<p>Orthosnake pipeline performs the following steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Fasta headers are modified, to satisfy the requirement of the Prokka:</dt><dd><ul>
+<li><p>symbols other than alphanumericals and <cite>_</cite> are converted to <cite>_</cite></p></li>
+<li><p>if header is longer than 20 symbols, it is cropped to the first 18 symbols, and dots are added to the end (e.g., <code class="docutils literal notranslate"><span class="pre">gi|15829254|ref|NC_002695.1</span></code> becomes <code class="docutils literal notranslate"><span class="pre">gi|15829254|ref|NC..</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Annotation with Prokka</p></li>
+<li><p>Genebank files converted to amino acid fasta files, with location and product information in headers.</p></li>
+<li><p>Orthogroups are inferred with OrthoFinder.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="building-a-graph">
+<h3>Building a graph<a class="headerlink" href="#building-a-graph" title="Permalink to this headline">¶</a></h3>
+<p><em>INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format</em></p>
+<p><em>OUTPUT: graph-based representation of genomes (sif-file and sqlite database)</em></p>
+<p>Graph structure is stored in a sif-formatted text file and in a sqlite database file. Sif-formated text file is needed for furher command-line analysis steps. Sqlite database is needed for subsequent export to the local gcb server.</p>
+<p>To build a graph, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">parse_og</span><span class="o">.</span><span class="n">py</span>  <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">txt</span> <span class="n">file</span> <span class="k">with</span> <span class="n">orthogroups</span><span class="p">]</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">path</span> <span class="ow">and</span> <span class="n">name</span> <span class="n">prefix</span> <span class="k">for</span> <span class="n">output</span> <span class="n">files</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">parse_og</span><span class="o">.</span><span class="n">py</span>  <span class="o">-</span><span class="n">i</span> <span class="n">Results</span><span class="o">/</span><span class="n">Orthogroups</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">o</span> <span class="n">graph</span>
+</pre></div>
+</div>
+<p>Main output files are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph.sif</span></code> - graph in a sif format.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph.db</span></code> - SQLite database conatining graph.</p></li>
+</ul>
+</div></blockquote>
+<p>Additional files for optional user analysis:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph_context.sif</span></code> - number of unique contexts for each gene.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph_genes.sif</span></code> - genes (nodes) from all genomes, with coordinates and Prokka annotations.</p></li>
+</ul>
+</div></blockquote>
+<p>In a text <code class="docutils literal notranslate"><span class="pre">graph.sif</span></code> file, each line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. SQLite database <code class="docutils literal notranslate"><span class="pre">graph.db</span></code> file contains same information, and can be supplemented with complexity values in the course of further analysis.</p>
+<p>To generate a subgraph in a sif-format, run following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">generate_subgraph</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="n">graph</span><span class="o">.</span><span class="n">sif</span> <span class="o">-</span><span class="n">o</span> <span class="n">subgraph</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span> <span class="o">--</span><span class="n">start</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">start</span> <span class="n">node</span><span class="p">]</span> <span class="o">--</span><span class="n">end</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">end</span> <span class="n">node</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This command generates subgraph <cite>subgraph.sif</cite>.</p>
+<p>Additional parameters:
+* ` –window ` - number of nodes, added to left and right side of refernce chain (default 20)
+* ` –depth ` - maximum length of deviating paths, which will be added to the subgraph {default is the length of the reference chain)
+* ` –tails ` - if deviating path too long, it will be replaced by left and right “tails”. This parameter is tails length (default 5)
+* ` –names_list ` - path to file with list of names for subgraph generating (default all names from <a href="#id1"><span class="problematic" id="id2">*</span></a>.sif will be used)</p>
+<p>To plot th</p>
+<p><cite>python plot_subgraph.py -i subgraph.sif -o subgrah_img</cite></p>
+<p>This script generate:
+* subgraph_img.ps file as image and
+* subgraph_img.dot file with DOT description of subgraph (DOT is popular graph structure description language)</p>
+<p>Additional parameters:
+* ` –freq_min` - minimal edge frequency to draw. Edge frequency is number of genomes with this edge.
+* ` –da` - legacy parameter, it’s not recommended to use. Draws all subgraph edges in any case, but edges wih frequency &lt; <cite>freq_min</cite> do not influence to subgraph layout.</p>
+</div>
+<div class="section" id="complexity-estimation">
+<h3>Complexity estimation<a class="headerlink" href="#complexity-estimation" title="Permalink to this headline">¶</a></h3>
+<p>The next step is the computing of genome complexity. To do this type in terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">start_computing</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="n">graph</span><span class="o">.</span><span class="n">sif</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">output</span> <span class="n">folder</span><span class="p">]</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl>
+<dt>Additional parameters:</dt><dd><p>–window - sliding window size (default 20)</p>
+<p>–iterations - number of iterations in probabilistic method (default 500)</p>
+<p>–genomes_list - path to file with a list of names which will be used to create a graph (default all strains from <a href="#id3"><span class="problematic" id="id4">*</span></a>.sif will be used)</p>
+<p>–min_depth, –max_depth - minimum and maximum depth of generated paths in the graph (default from 0 to inf)</p>
+<p>–save_db - path to the database, created by orthfinder_parse.py (default data will not be saved to db, only to txt). It’s necessary to use this parameter if you want to use this complexity profile in the stand-alone browser-based GCB application.</p>
+</dd>
+</dl>
+<p>Output files for each contig in the reference genome:</p>
+<blockquote>
+<div><p><code class="file docutils literal notranslate"><span class="pre">all_bridges_contig_n.txt</span></code> - this file contains information about the number of deviating paths between each pair of nodes in the reference genome</p>
+</div></blockquote>
+</div>
+<div class="section" id="building-a-graph-and-complexity-estimation-with-a-single-command">
+<h3>Building a graph and complexity estimation with a single command<a class="headerlink" href="#building-a-graph-and-complexity-estimation-with-a-single-command" title="Permalink to this headline">¶</a></h3>
+<p>gg.py</p>
+</div>
+<div class="section" id="podval">
+<h3>PODVAL<a class="headerlink" href="#podval" title="Permalink to this headline">¶</a></h3>
+<p>Then gene annotation with prokka  tool of each genome is performed. Genbank files then converted to fasta formatted amino acid protein sequences with a custom python3 script. This script inserts special information about genes in fasta headers, namely: genome file name, numeric id, product name, contig, start, end (for example, <code class="docutils literal notranslate"><span class="pre">&gt;GCF_000007445|4|Threonine_synthase|NC_004431.1|4445|5731</span></code>). Then these files are used to infer orthology groups with OrthoFinder tool. The resulting file with orthology groups (OG) contains information about each OG in the following format: <code class="docutils literal notranslate"><span class="pre">&lt;og</span> <span class="pre">id&gt;:</span> <span class="pre">&lt;gene1&gt;</span> <span class="pre">&lt;gene2&gt;</span> <span class="pre">…</span></code></p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OG0008594</span><span class="p">:</span> <span class="n">GCF_001618325</span><span class="o">|</span><span class="mi">2406</span><span class="o">|</span><span class="n">Small_toxic_polypeptide_LdrD</span><span class="o">|</span><span class="n">NZ_CP015069</span><span class="o">.</span><span class="mi">1</span><span class="o">|</span><span class="mi">2607133</span><span class="o">|</span><span class="mi">2607240</span> <span class="n">GCF_001663475</span><span class="o">|</span><span class="mi">366</span><span class="o">|</span><span class="n">Small_toxic_polypeptide_LdrD</span><span class="o">|</span><span class="n">NZ_CP015159</span><span class="o">.</span><span class="mi">1</span><span class="o">|</span><span class="mi">380042</span><span class="o">|</span><span class="mi">380149</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Standalone version</a><ul>
+<li><a class="reference internal" href="#roadmap">Roadmap</a></li>
+<li><a class="reference internal" href="#command-line-tools">Command-line tools</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#orthogroup-inference">Orthogroup inference</a></li>
+<li><a class="reference internal" href="#building-a-graph">Building a graph</a></li>
+<li><a class="reference internal" href="#complexity-estimation">Complexity estimation</a></li>
+<li><a class="reference internal" href="#building-a-graph-and-complexity-estimation-with-a-single-command">Building a graph and complexity estimation with a single command</a></li>
+<li><a class="reference internal" href="#podval">PODVAL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="interface.html"
+                        title="previous chapter">GUI description</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="FAQ.html"
+                        title="next chapter">Frequently Asked Questions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/standalone.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="FAQ.html" title="Frequently Asked Questions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="interface.html" title="GUI description"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">GCB_MAN  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, ADD.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>

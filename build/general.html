@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Main concepts &#8212; GCB_MAN  documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GUI description" href="interface.html" />
+    <link rel="prev" title="Genome Complexity Browser" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="interface.html" title="GUI description"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Genome Complexity Browser"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">GCB_MAN  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="main-concepts">
+<h1>Main concepts<a class="headerlink" href="#main-concepts" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="graph-representation-of-genomes">
+<h2>Graph representation of genomes<a class="headerlink" href="#graph-representation-of-genomes" title="Permalink to this headline">¶</a></h2>
+<p>Let’s consider three genomes in which orthogroups were inferred. To make a graph representation of the gene neigbourhoods in these genomes we will consider each orthogroup as a node. Nodes are connected by an edge if there is at least one genome in which corresponding genes (orthology groups representatives) are adjacent.</p>
+<img alt="graph scheme" class="align-center" src="_images/graph_scheme.png" />
+<p>In our approach, genes are ordered by their centered position: (start + end)/2 on a replicon (contig). Each replicon (contig) is treated separately. Strand information is ignored in graph building procedure. Because gene order in a set of genomes is represented by a directed graph, genomes may be co-aligned against each other before graph construction to optimize their orientation, but this does not significantly affect the result.</p>
+<p>Several genes from one genome may be present in same orthogroup (paralogous genes). This makes inapplicable the above described scheme, and we propose two possible way-outs. The first approach is to skip such orthogroups in the graph for genomes containing paralogs (however, the same orthogroup will be included in the graph for genomes containing no paralogs). Or paralogous genes can be orthologized and be incorporated in the graph. By orthologization we mean procedure, which delineate paralogues genes by adding unique suffix to each unique paralogous gene context. For example, sequence of genes: A -&gt; B -&gt; C -&gt; D -&gt; B -&gt; E, after orthologization becomes A -&gt; B_1 -&gt; C -&gt; D -&gt; B_2 -&gt; E.</p>
+<p>The graph representation allows compactly represent possible variants of the repertoire and the neigbourhood of genes in genomes. However, complete graph of all genomes will be too complicated for visualization, unless you are working with viruses. To explore a certain region of interest (gene, operon, genomic island), subgraphs can be generated. Subgraph is part of a total graph that represents some specific region of the reference genome.</p>
+</div>
+<div class="section" id="complexity-profile">
+<h2>Complexity profile<a class="headerlink" href="#complexity-profile" title="Permalink to this headline">¶</a></h2>
+<p>By complexity of a genomic region, we mean the number of paths in the graph representing this region. The rationale here is the following. If no genome rearrangements resulting in gene order changes are observed in this region than its graph representation will be a simple chain. If some changes are observed (insertion, deletion, transposition, inversion of regions longer than a single gene) then the graph will contain additional edges. The more frequently gene rearrangements occur in a particular genomic region the more edges (and paths) the corresponding graph will contain.</p>
+<p>Example of a rather “quiet” region is below. Here three possible gene insertions, one deletion, and one gene transposition can be seen.</p>
+<img alt="quiet region" class="align-center" src="_images/quiet.png" />
+<p>More “complex” region may look like the graph below, with multiple overlapping gene replacements and insertions.</p>
+<img alt="complex region" class="align-center" src="_images/complex_region.png" />
+<p>To quantify this visual expression we implement an algorithm which counts the number of distinct paths in a (sub)graph representing some genome region - the value we will further call <strong>complexity</strong>.  Complexity value is calculated for a given gene in a reference genome in a window of defined width (5, 10,20 are typical values). Scanning the genome with the sliding window we obtain complexity profile of that genome. Example of such a profile for <em>Escherichia coli K12 MG1655</em> genome is given below.</p>
+<img alt="complexity profile" class="align-center" src="_images/comp_profile.png" />
+<p>Regions of low and high complexity can be seen which corresponds to cold and hot spots of genome rearrangements, mainly due to the frequency of fixed horizontal gene transfer (HGT) events.</p>
+</div>
+<div class="section" id="genome-complexity-browsing">
+<h2>Genome Complexity browsing<a class="headerlink" href="#genome-complexity-browsing" title="Permalink to this headline">¶</a></h2>
+<p>We created GCB to analyze genome variability on two scales simultanously. Globally, the complexity profile of the whole genome is shown. Localy, some genome region is represented in a graph-based format. This combination creates a unique opportunity to “browse” genome variability: to find hotspots, to analyze gene contents and patterns in this hotspots, or to investigate the level of variability in the region in which the genes of interest to us are located.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Main concepts</a><ul>
+<li><a class="reference internal" href="#graph-representation-of-genomes">Graph representation of genomes</a></li>
+<li><a class="reference internal" href="#complexity-profile">Complexity profile</a></li>
+<li><a class="reference internal" href="#genome-complexity-browsing">Genome Complexity browsing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Genome Complexity Browser</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="interface.html"
+                        title="next chapter">GUI description</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/general.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="interface.html" title="GUI description"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Genome Complexity Browser"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">GCB_MAN  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, ADD.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
+    </div>
+  </body>
+</html>
