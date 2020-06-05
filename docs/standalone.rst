@@ -2,17 +2,18 @@
 Standalone version 
 ==============================================
 
+Command-line tools (basic analysis)
+####################################
+
 Roadmap
-########
+-------
 
 Standalone version should be used when the user wants to work with a custom set of genomes. 
 Command-line scripts are provided to: calculate complexity profile, generate subgraphs, generate a database which can be imported to browser-based GUI application. Scheme of actions and scripts is shown below.
 
-.. image:: img/alone/standalone_scheme_hor2_2.png
+.. image:: img/alone/standalone_scheme_hor_short.png
 	:align: center
 
-Command-line tools
-###################
 
 Prerequisites
 -------------
@@ -25,6 +26,7 @@ We recomend using our `orthosnake <https://github.com/paraslonic/orthosnake>`_ p
 
 
 **Orthosnake pipeline**
+
 *INPUT: Fasta-formated files with .fna extension, one file per genome*
 
 *OUTPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
@@ -35,14 +37,14 @@ Steps:
 	2. Put fasta-formated genome files in ``fna`` folder of the orthosnake folder. 
 	3. Rut snakemake with ``--use-conda`` and other appropriate options
 
-The following code will run the test dataset analysis ::
+The following code will run analysis of the test dataset (three plasmids)::
 
    git clone https://github.com/paraslonic/orthosnake.git
    cd orthosnake
    cp test_fna/* fna # copy test fasta files with three plasmids
    snakemake -j 4 --use-conda
 
-Here, we used snakemake with parameters specifying the number of available cores (``-j 4``), and using conda environments (``--use-conda``). During the first start of the pipeline, it will take several minutes to install the necessary programs into the conda environments.
+Here, we used snakemake with parameters specifying the number of available cores (``-j 4``), and using conda environments (``--use-conda``). During the first start of the pipeline, it will take about ten minutes to install the necessary programs into the conda environments.
 
 If genome files have extension, other than ``.fna`` (e.g., ``*.fasta``) , please rename them. For example, to change the file extension from ``.fasta`` to ``.fna``, run::
 
@@ -54,8 +56,54 @@ Orthosnake pipeline performs the following steps:
 		* symbols other than alphanumericals and `_` are converted to `_`
 		* if header is longer than 20 symbols, it is cropped to the first 18 symbols, and dots are added to the end (e.g., ``gi|15829254|ref|NC_002695.1`` becomes ``gi|15829254|ref|NC..``)
 	* Annotation with Prokka 
-	* Genebank files converted to amino acid fasta files, with location and product information in headers.
+	* Genebank files converted to amino acid fasta files, with location and product information in headers (format: <genome_name>|<numerical_id>|<start>|<end>|<product>).
 	* Orthogroups are inferred with OrthoFinder.
+
+Building a graph and complexity estimation with a single command
+-----------------------------------------------------------------
+*INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
+
+*OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text)*
+
+To perform the basic analysis, run::
+
+	python3 gg.py  -i [orthogroups file] -o [path and name prefix for output files] --reference [name of the reference genome]
+
+parameters:
+
+	``-i`` -- path to orthogroups file in OrthoFinder format. Gene names should be in the same format as that of orthosnake ()
+	``--reference`` --	name of the reference genome (coincides with the filename without extension) 
+
+
+to indicate a reference genome use its 
+
+To Name of the refence genome is the filename 
+subset of genomes
+hotspots
+complexity one reference or all
+
+
+
+
+
+
+
+
+
+
+
+
+Command-line tools (advanced)
+#############################
+
+Roadmap
+-------
+For additional analysis, commands can be used that: 1) generate a complete graph, 2) generate and visualize subgraphs, 3) calculate the complexity.
+Subgraph generation allows not to use the local server for exploring small regions of the genome in the form of a graph.
+Separate full subgraph generation
+
+.. image:: img/alone/standalone_scheme_hor_short.png
+	:align: center
 
 Building a graph
 -----------------
@@ -93,15 +141,15 @@ The next step is the computing of genome complexity. To do this type in terminal
 	python3 start_computing.py -i graph.sif -o [path to output folder] --reference [name of reference genome]
 
 Additional parameters:
-	--window - sliding window size (default 20)
+	\\-\\-window - sliding window size (default 20)
 	
-	--iterations - number of iterations in probabilistic method (default 500)
+	\\-\\-iterations - number of iterations in probabilistic method (default 500)
 
-	--genomes_list - path to file with a list of names which will be used to create a graph (default all strains from *.sif will be used)
+	\\-\\-genomes_list - path to file with a list of names which will be used to create a graph (default all strains from *.sif will be used)
 
-	--min_depth, --max_depth - minimum and maximum depth of generated paths in the graph (default from 0 to inf)
+	\\-\\-min_depth, \\-\\-max_depth - minimum and maximum depth of generated paths in the graph (default from 0 to inf)
 
-	--save_db - path to the database, created by orthfinder_parse.py (default data will not be saved to db, only to txt). It’s necessary to use this parameter if you want to use this complexity profile in the stand-alone browser-based GCB application.
+	\\-\\-save_db - path to the database, created by orthfinder_parse.py (default data will not be saved to db, only to txt). It’s necessary to use this parameter if you want to use this complexity profile in the stand-alone browser-based GCB application.
 
 
 Output files for each contig in the reference genome:
