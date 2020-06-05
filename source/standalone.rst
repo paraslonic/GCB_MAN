@@ -21,11 +21,10 @@ Orthogroup inference
 ---------------------
 
 Orthogroup inference is the first step in the standalone analysis.
-We recomend using our `orthosnake <https://github.com/paraslonic/orthosnake>`_ pipeline to perfrom orthogroup inference, because GCB requires some special formating of the files.
+We recomend using our `orthosnake <https://github.com/paraslonic/orthosnake>`_ pipeline for inference of orthogroups, because GCB requires some special formating of the files.
 
 
 **Orthosnake pipeline**
-
 *INPUT: Fasta-formated files with .fna extension, one file per genome*
 
 *OUTPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
@@ -33,50 +32,95 @@ We recomend using our `orthosnake <https://github.com/paraslonic/orthosnake>`_ p
 Steps: 
 
 	1. Clone or download orthosnake GIT repository: https://github.com/paraslonic/orthosnake
-	2. Put fasta-formated genome files in fna folder of the orthosnake folder. 
-	3. Rut snakemake with appropriate settings
+	2. Put fasta-formated genome files in ``fna`` folder of the orthosnake folder. 
+	3. Rut snakemake with ``--use-conda`` and other appropriate options
 
-Example:
+The following code will run the test dataset analysis ::
 
-.. code-block:: bash
-   git clone git@github.com:paraslonic/orthosnake.git
+   git clone https://github.com/paraslonic/orthosnake.git
    cd orthosnake
    cp test_fna/* fna # copy test fasta files with three plasmids
-   snakemake -j 5 -k --latency-wait 120 --use-conda
+   snakemake -j 4 --use-conda
 
-If genome files have extension other than .fna please rename them, i.e. with following command:
-`for i in fna/*.fasta; do mv $i fna/$(basename $i .fasta).fna; done`
+Here, we used snakemake with parameters specifying the number of available cores (``-j 4``), and using conda environments (``--use-conda``). During the first start of the pipeline, it will take several minutes to install the necessary programs into the conda environments.
 
-### Algorightm
+If genome files have extension, other than ``.fna`` (e.g., ``*.fasta``) , please rename them. For example, to change the file extension from ``.fasta`` to ``.fna``, run::
 
-* Fasta files headers are modified to be consistent with Prokka:  
-  * if header contains symbols other than alphanumericals and `_` they are converted to `_`
-  * if header is longer than 20 symbols it is cropped to first 18 symbols and dots are added to the end (i.e. `gi|15829254|ref|NC_002695.1` becomes `gi|15829254|ref|NC..`)
-* Annotation with Prokka 
-* Amino acid fasta files are generated from genebank files; gene location and product information are listed in headers.
-* Orthogroups are inferred with OrthoFinder.
+	for i in fna/*.fasta; do mv $i fna/$(basename $i .fasta).fna; done
 
+Orthosnake pipeline performs the following steps:
+
+	* Fasta headers are modified, to satisfy the requirement of the Prokka:  
+		* symbols other than alphanumericals and `_` are converted to `_`
+		* if header is longer than 20 symbols, it is cropped to the first 18 symbols, and dots are added to the end (e.g., ``gi|15829254|ref|NC_002695.1`` becomes ``gi|15829254|ref|NC..``)
+	* Annotation with Prokka 
+	* Genebank files converted to amino acid fasta files, with location and product information in headers.
+	* Orthogroups are inferred with OrthoFinder.
 
 Building a graph
 -----------------
+*INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
 
-Graph structure is stored in text file with sif format, and in database
-When orthogroups are inferred, the next step is parsing of Orthofinder outputs. To do this you should open source directory and type in terminal::
+*OUTPUT: graph-based representation of genomes (sif-file and sqlite database)*
+
+Graph structure is stored in a sif-formatted text file and in a sqlite database file. Sif-formated text file is needed for furher command-line analysis steps. Sqlite database is needed for subsequent export to the local gcb server. 
+
+To build a graph, run::
 
 	python3 parse_og.py  -i [path to txt file with orthogroups] -o [path and name prefix for output files]
 
 For example::
 
-	python3 parse_og.py  -i ~/data/Mycoplasma/Results/Orthogroups.txt -o ~/data/outputs/Mycoplasma/graph
+	python3 parse_og.py  -i Results/Orthogroups.txt -o graph
 
-Main output files:
+Main output files are:
 
-	- :file:`graph.sif` - all edges list of the genomes graph
-	- :file:`graph.db` - SQLite database with all parsed information
-	- :file:`graph_context.sif` - number of unique contexts, computed for each node in the graph
-	- :file:`graph_genes.sif` - list of all genes (nodes) from all genomes, with coordinates and Prokka annotations
+	- :file:`graph.sif` - graph in a sif format.
+	- :file:`graph.db` - SQLite database conatining graph.
 
-The main graph structure is stored in a text graph.sif file, where each one line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. This file is used to create a graph object, which is used in all graph processing procedures.
+Additional files for optional user analysis:
+
+	- :file:`graph_context.sif` - number of unique contexts for each gene.
+	- :file:`graph_genes.sif` - genes (nodes) from all genomes, with coordinates and Prokka annotations.
+
+In a text ``graph.sif`` file, each line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. SQLite database ``graph.db`` file contains same information, and can be supplemented with complexity values in the course of further analysis.  
+
+Subgraph construction and visualization
+----------------------------------------
+*INPUT: graph-based representation of genomes (sif-file)*
+
+*OUTPUT: graph-based representation of genomes (sif-file, graph visualization in PostScript or DOT fofrmat)*
+
+The graph representation allows compactly represent possible variants of the repertoire and the neigbourhood of genes in genomes. However, complete graph of all genomes will be too complicated for visualization, unless you are working with viruses. To explore a certain region of interest (gene, operon, genomic island), subgraphs can be generated. Subgraph is part of a total graph that represents some specific region of the reference genome. You may generate and visualize a subgraph with command-line tools described here, or  using a local GCB server.
+
+To generate subgraph, run following command::
+
+`python generate_subgraph.py -i graph.sif -o subgraph --reference [name of reference genome] --start [name of start node] --end [name of end node]`
+
+This command generates subgraph `subgraph.sif`, which is connected with START......END simple chain of nodes in the reference genome.
+
+Additional parameters:
+* ` --window ` - number of nodes, added to left and right side of refernce chain (default 20)
+* ` --depth ` - maximum length of deviating paths, which will be added to the subgraph {default is the length of the reference chain)
+* ` --tails ` - if deviating path too long, it will be replaced by left and right "tails". This parameter is tails length (default 5)
+* ` --names_list ` - path to file with list of names for subgraph generating (default all names from *.sif will be used)
+
+### Graph drawing
+
+Now we can run drawing of our mini-graph. Let's go to the `recombinatin_draw` directory in the geneGraph folder and type in terminal:
+
+`python plot_subgraph.py -i subgraph.sif -o subgrah_img`
+
+This script generate:
+* subgraph_img.ps file as image and 
+* subgraph_img.dot file with DOT description of subgraph (DOT is popular graph structure description language)
+
+Additional parameters:
+* ` --freq_min` - minimal edge frequency to draw. Edge frequency is number of genomes with this edge.
+* ` --da` - legacy parameter, it's not recommended to use. Draws all subgraph edges in any case, but edges wih frequency < `freq_min` do not influence to subgraph layout.
+
+
+
 
 Complexity estimation
 -------------------------
@@ -101,8 +145,13 @@ Output files for each contig in the reference genome:
 
 	:file:`all_bridges_contig_n.txt` - this file contains information about the number of deviating paths between each pair of nodes in the reference genome
 
-Subgraph visualization
------------------------
+
+
+Building a graph and complexity estimation with a single command
+-----------------------------------------------------------------
+
+gg.py
+
 
 PODVAL
 -------------------
