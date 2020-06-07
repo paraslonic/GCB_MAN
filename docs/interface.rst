@@ -58,16 +58,14 @@ Now we click ``DRAW GRAPH`` button on the bottom panel and graph representation 
 
 Note that edges are of different colors in the graph: black and red. Shown in red are edges from the reference genome, all other edges are black, they correspond to genes neighbourhood variants not present in a reference genome. 
 
-Nodes have different colors too. Nodes of reference genome genes are colored red if they are located inbetween ``Start coordinate - neigbhourhood`` and ``End coordinate + neigbhourhood``; they are colored pink if they are present in a reference genome, but are located outside the mentioned region. Nodes of genes, that are absent in a reference genome, are colored green. Gray rectangle is drawn around nodes located between ``Start coordinate`` and ``End coordinate`` (lac operon genes in our case). 
-
-Parameter ``neigbhourhood`` is used 
+Nodes have different colors too. Nodes of reference genome genes are colored red if they are located inbetween ``Start coordinate - neigbhourhood`` and ``End coordinate + neigbhourhood``; they are colored pink if they are present in a reference genome, but are located outside the mentioned region. Nodes of genes, that are absent in a reference genome, are colored green. Gray rectangle is drawn around nodes located between ``Start coordinate`` and ``End coordinate`` (lac operon genes in this case). 
 
 More clear layout can be obtained manually by left clicking and dragging nodes with mouse.
 
 .. image:: img/tutorial/use1/use4_.png
 
-We can see now that operon is located in a conservative context in most of the genomes (thick edges designated with 1 and 2).
-We may notice that one of the operon’s genes is absent in some set of genomes. By left clicking on that gene we can examine its gene product. Gene products are assigned with `Prokka <https://github.com/tseemann/prokka>`__ tool in the web version of GCB. Text in popup box is formated as ```product: length (position)``` (length in nucleotides, position is reported only for genes present in refernce genome).
+We can see now that operon is located in a conserved context in most of the genomes (thick edges designated with 1 and 2).
+One of the operon’s genes is absent in some set of genomes. By left clicking on that gene we can select it and know its gene product. Gene products are assigned with `Prokka <https://github.com/tseemann/prokka>`__ tool in the web version of GCB. 
 
 .. image:: img/tutorial/use1/select_node.gif
 
@@ -75,7 +73,7 @@ In our case, Galactoside acetyltransferase is missing from the operon in some ge
 
 .. image:: img/tutorial/use1/select_edge.gif
 
-For now we have determined, that a number of genomes does not contain Galactoside acetyltransferase. One can also notice nodes connected by a thin edges, which seems to represent other alternative variants of the operon. Let's click on that nodes and on the nodes from the reference, to see their products.  
+For now we have determined, that a number of genomes does not contain Galactoside acetyltransferase. We can also notice nodes connected by a thin edges, which seems to represent other alternative variants of the operon. Let's click on that nodes and on the nodes from the reference, to see their products.  
 
 .. image:: img/tutorial/use1/look_orphans1.gif
 
@@ -91,9 +89,16 @@ Finaly to verify our findings let's switch to paralogues orthologization mode. T
 This more complicated graph comes from not ignoring paralogous genes as it done by default, but instead showing all of them.
 
 
-Our analysis was not quick and simple, its more like exploration than gaining quick answers. And like web browser gives opportunity to surfe the internet, our browser allows surfing genomes.
-
-
-
 Combined analysis
 ------------------
+
+With GCB, you can find which genes are in the hot spots of genome variability. To do this, first select an organism, strain and replicon (chromosome or plasmids, complete genomes are reccomended to be used as reference). Then, in complexity profile panel, click on some of the hot spots to set the current position (depicted with vertical line in the complexity plot and also in ``Start`` and ``End`` coordinates in the left sliding panel). Before proceding to the graph visualization, we recommend adjusting graph rendering options: set ``Minimal edge value`` to 10 (the more intense the hostpot, the bigger this value should be), ``Window`` to 10-20, depending on the hotspot width.  Now press the ``DRAW GRAH`` button in the upper left corner of the *Complexity* panel. Changing colors will be visible above the graph draw buttons while it is being built, and then graph will apear in the *Grpah* panel. To select several genes, for example, located at the variable region, press the left mouse button and holding it move the cursor to surround the desired genes. Their products will apear in the bottom right part of the **Graph** panel.
+
+
+Publication-ready graph rendering
+---------------------------------
+
+A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click "DOWNLOAD JPEG" or "DOWNLOAD JSON" buttons.
+JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Adjust rendering options.
+
+

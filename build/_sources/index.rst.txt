@@ -28,7 +28,7 @@ Local genome variability profile may be used to identify:
 	- Hotspots of horizontal gene transfer or other local gene rearrangement events. 
 	- Cold spots, regions of the genome with virtually no changes in the considered set of genomes.
 
-The GCB is available as a `web server <gcb.rcpcm.org>`_ and as a `standalone application <https://github.com/DNKonanov/geneGraph>`_. 
+The GCB is available as a `web server <https://gcb.rcpcm.org>`_ and as a `standalone application <https://github.com/DNKonanov/geneGraph>`_. 
 Web server contains precalculated data for 143 prokaryote species. Standalone version allows to analyze a custom set of genomes (basic command-line skills will be needed). 
 
 Preprint is `available <https://www.biorxiv.org/content/10.1101/713123v1>`_ . Please cite it when reporting results obtained with the GCB.

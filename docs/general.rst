@@ -49,6 +49,7 @@ Genome Complexity browsing
 
 We created GCB to analyze genome variability on two scales simultanously. Globally, the complexity profile of the whole genome is shown. Localy, some genome region is represented in a graph-based format. This combination creates a unique opportunity to "browse" genome variability: to find hotspots, to analyze gene contents and patterns in this hotspots, or to investigate the level of variability in the region in which the genes of interest to us are located.
 
+Web browser alows surfing the Internet, our browser allows surfing genomes.
 
 
 

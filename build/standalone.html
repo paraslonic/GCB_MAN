@@ -101,7 +101,7 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <div class="section" id="building-a-graph-and-complexity-estimation-with-a-single-command">
 <h3>Building a graph and complexity estimation with a single command<a class="headerlink" href="#building-a-graph-and-complexity-estimation-with-a-single-command" title="Permalink to this headline">¶</a></h3>
 <p><em>INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format</em></p>
-<p><em>OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text)</em></p>
+<p><em>OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text file)</em></p>
 <p>To perform the basic analysis, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">gg</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">orthogroups</span> <span class="n">file</span><span class="p">]</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span>
 </pre></div>
@@ -116,7 +116,7 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">--window</span></code>  – size of the window used in the complexity estimation (default is 20). Only the paths inside the window increase the value of complexity.</p>
 <p><code class="docutils literal notranslate"><span class="pre">--genomes_list</span></code> – a text file containing the names of the genomes that will be used to calculate the complexity. Useful for analysis of parts of genomes, such as phylogenetic tree clades, for their subsequent comparison.</p>
-<p><code class="docutils literal notranslate"><span class="pre">--coalign</span></code> – a binary value (true/false) that determines whether to perform the step of selecting the optimal genomes orientation. It can take a lot of time when using a large number of draft genomes (5 hours for 1000 draft genomes).</p>
+<p><code class="docutils literal notranslate"><span class="pre">--coalign</span></code> – a binary value (True/False) that determines whether to perform the step of selecting the optimal genomes orientation. It can take a lot of time when using a large number of draft genomes (5 hours for 1000 draft genomes).</p>
 </div></blockquote>
 <p>Advanced complexity estimation algorithm settings (practically not used):</p>
 <blockquote>
@@ -124,8 +124,14 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <p><code class="docutils literal notranslate"><span class="pre">--min_depth</span></code> – minimum length of deviating path (default is 0)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--max_depth</span></code> – maximum length of deviating path (default is inf)</p>
 </div></blockquote>
-<p>hotspots
-complexity one reference or all</p>
+<p>Main output files are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph.db</span></code> - SQLite database conatining graph and complexity values,  paralogues genes are skipped.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">graph_pars.db</span></code> - SQLite database conatining graph and complexity values, paralogues genes are orthologized.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">[reference</span> <span class="pre">genome]/prob_window_complexity_contig_[contig].txt</span></code> - text file containing complexity values for each contig in the reference genome.</p></li>
+</ul>
+</div></blockquote>
 </div>
 </div>
 <div class="section" id="command-line-tools-advanced">

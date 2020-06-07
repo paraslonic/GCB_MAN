@@ -94,6 +94,12 @@ We may notice that one of the operon’s genes is absent in some set of genomes.
 </div>
 <div class="section" id="combined-analysis">
 <h3>Combined analysis<a class="headerlink" href="#combined-analysis" title="Permalink to this headline">¶</a></h3>
+<p>With GCB, you can find which genes are in the hot spots of genome variability. To do this, first select an organism, strain and replicon (chromosome or plasmids, complete genomes are reccomended to be used as reference). Then, in complexity profile panel, click on some of the hot spots to set the current position (depicted with vertical line in the complexity plot and also in <code class="docutils literal notranslate"><span class="pre">Start</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span></code> coordinates in the left sliding panel). Before proceding to the graph visualization, we recommend adjusting graph rendering options: set <code class="docutils literal notranslate"><span class="pre">Minimal</span> <span class="pre">edge</span> <span class="pre">value</span></code> to 10 (the more intense the hostpot, the bigger this value should be), <code class="docutils literal notranslate"><span class="pre">Window</span></code> to 10-20, depending on the hotspot width.  Now press the <code class="docutils literal notranslate"><span class="pre">DRAW</span> <span class="pre">GRAH</span></code> button in the upper left corner of the <em>complexity</em> panel.</p>
+</div>
+<div class="section" id="publication-ready-graph-rendering">
+<h3>Publication-ready graph rendering<a class="headerlink" href="#publication-ready-graph-rendering" title="Permalink to this headline">¶</a></h3>
+<p>A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click “DOWNLOAD JPEG” or “DOWNLOAD JSON” buttons.
+JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in <a class="reference external" href="https://cytoscape.org/">Cytoscape</a> for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File-&gt;Import-&gt;Network from File and select file, that was downloaded from GCB. Adjust rendering options.</p>
 </div>
 </div>
 </div>
@@ -112,6 +118,7 @@ We may notice that one of the operon’s genes is absent in some set of genomes.
 <li><a class="reference internal" href="#complexity-analysis">Complexity analysis</a></li>
 <li><a class="reference internal" href="#gene-neigbourhood-analysis">Gene neigbourhood analysis</a></li>
 <li><a class="reference internal" href="#combined-analysis">Combined analysis</a></li>
+<li><a class="reference internal" href="#publication-ready-graph-rendering">Publication-ready graph rendering</a></li>
 </ul>
 </li>
 </ul>

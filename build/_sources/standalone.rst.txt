@@ -65,7 +65,7 @@ Building a graph and complexity estimation with a single command
 -----------------------------------------------------------------
 *INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
 
-*OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text)*
+*OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text file)*
 
 To perform the basic analysis, run::
 
@@ -85,7 +85,7 @@ Optional parameters:
 
   	``--genomes_list`` -- a text file containing the names of the genomes that will be used to calculate the complexity. Useful for analysis of parts of genomes, such as phylogenetic tree clades, for their subsequent comparison.
 
-	``--coalign`` -- a binary value (true/false) that determines whether to perform the step of selecting the optimal genomes orientation. It can take a lot of time when using a large number of draft genomes (5 hours for 1000 draft genomes).
+	``--coalign`` -- a binary value (True/False) that determines whether to perform the step of selecting the optimal genomes orientation. It can take a lot of time when using a large number of draft genomes (5 hours for 1000 draft genomes).
 
 Advanced complexity estimation algorithm settings (practically not used):
 
@@ -95,12 +95,11 @@ Advanced complexity estimation algorithm settings (practically not used):
 
 	``--max_depth`` -- maximum length of deviating path (default is inf)
  
+Main output files are:
 
-
-
-hotspots
-complexity one reference or all
-
+	- :file:`graph.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
+	- :file:`graph_pars.db` - SQLite database conatining graph and complexity values, paralogues genes are orthologized.
+	- :file:`[reference genome]/prob_window_complexity_contig_[contig].txt` - text file containing complexity values for each contig in the reference genome. 
 
 
 
