@@ -2,7 +2,7 @@
 Standalone version 
 ==============================================
 
-Command-line tools (basic analysis)
+Command-line tools 
 ####################################
 
 Roadmap
@@ -17,6 +17,29 @@ Command-line scripts are provided to: calculate complexity profile, generate sub
 
 Prerequisites
 -------------
+
+* Conda
+
+Please refer to the `installation guide <https://docs.conda.io/projects/conda/en/latest/user-guide/install/>`_.
+
+* Snakemake
+
+	Can be installed vie conda by
+	``
+
+* Python 3.4 or later
+
+* Graphviz and pygraphviz libraries
+
+Can be installed by running::
+    `sudo apt-get install graphviz python3-graphviz python3-pygraphviz` or by `conda install`
+
+
+* gene_graph_lib Python3 module
+
+Can be installed by running::
+
+    pip3 install gene_graph_lib
 
 Orthogroup inference
 ---------------------
@@ -97,8 +120,9 @@ Advanced complexity estimation algorithm settings (practically not used):
  
 Main output files are:
 
-	- :file:`graph.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
-	- :file:`graph_pars.db` - SQLite database conatining graph and complexity values, paralogues genes are orthologized.
+	- :file:`<prefix>.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
+	- :file:`<prefix>_pars.db` - SQLite database conatining graph and complexity values, paralogues genes are orthologized.
 	- :file:`[reference genome]/prob_window_complexity_contig_[contig].txt` - text file containing complexity values for each contig in the reference genome. 
-
+	- :file:`<prefix>_context.sif` - number of unique contexts, computed for each node in graph
+	- :file:`<prefix>_genes.sif` - list of all genes (nodes) from all genomes, with coordinates and Prokka annotations
 
