@@ -42,27 +42,80 @@
             
   <div class="section" id="frequently-asked-questions">
 <h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
-<p>What are those circles and lines in the graph form?</p>
-<p>How gene name is selected?</p>
-<p>Does all variants that present in considered set of genomes are represented in the graph visualization form?</p>
+<div class="section" id="what-is-this-curvulin-in-the-complexity-panel">
+<h2>What is this curvulin in the Complexity panel?<a class="headerlink" href="#what-is-this-curvulin-in-the-complexity-panel" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Not always. GCB by default skips paralogues genes, but they can still be analysed by switching <code class="docutils literal notranslate"><span class="pre">Draw</span> <span class="pre">paralogues</span></code> toggle on top panel.</p></li>
+<li><p>It is a local genome variability profile, which we call complexity profile. The higher the values, the more often changes occurs in this region of genome. By change we mean: gene insertions/deletions/translocations. Large-scale changes (e.g., large inversions) have little effect on complexity value; large scale means larger than the <em>window</em> parameter. Complexity profiles calculated with window values 20, 50, 100 are available at gcb.rcpcm.org, to obtain complexity profiles with other windows sizes you need to use stand-alone version.</p></li>
 </ul>
-<p>Where should I take coordinates of genes of interest?
-- from genome annotations (i.e. Genebank or RefSeq database) by searching for particular gene.
-- DOOR database [Mao, Xizeng, et al., Nucleic acids research, 2014] (currently available <a class="reference external" href="http://161.117.81.224/DOOR3/">here</a> ) can be used to find information about operons of specific organism.
-- from papers, in which genome coordinates are specified.</p>
-<p>How can I obtain graph image in vector format for publication?
-- Export it to JSON and then open it in a Cytoscape or other graph editing software.</p>
-<p>What if genome of interest is absent at gcb.rcpcm.org?</p>
-<p>Can I use PC for the standalone analyisis or do I need a computational cluster?</p>
-<p>How many genomes may be analyzed in a standalone version?</p>
-<p>Can I adress someone to help me with my organisms?</p>
+</div>
+<div class="section" id="why-do-you-call-it-complexity-not-variability">
+<h2>Why do you call it complexity, not variability?<a class="headerlink" href="#why-do-you-call-it-complexity-not-variability" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>You can write to the <a class="reference external" href="https://groups.google.com/forum/#!forum/genome-complexiity-browser">google group</a>. We will be hapy to help you.</p></li>
+<li><p>For two reasons. Firstly, only fixed variants are observed, so we measure not variability <em>per se</em>, but combination of genome variability and fitness cost of the genome changes. Secondly, not only the quantity, but also the pattern of the changes contributes to the complexity value. The more overlapping changes occur, the greater their contribution.</p></li>
 </ul>
-<p>Why should I run several python scripts insted of one in a standalone version?
-- you may choose different references. Only complexity values for the selected reference are added to database. Usually we have one or several genomes of particular interest or of good quality which may become references. Computation of complexity values for each genome in a set to</p>
+</div>
+<div class="section" id="what-are-those-circles-and-lines-in-the-graph-panel">
+<h2>What are those circles and lines in the Graph panel?<a class="headerlink" href="#what-are-those-circles-and-lines-in-the-graph-panel" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Circles correspond to the genes, or more precisely, to the orthogroups, inferred from the set of genomes. Lines (graph edges) connects genes, which are adjacent in at least one of the genomes (the larger the number of genomes these genes are located next to each other, the thicker the line).</p></li>
+</ul>
+</div>
+<div class="section" id="how-node-name-is-selected">
+<h2>How node name is selected?<a class="headerlink" href="#how-node-name-is-selected" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>By majority rule. We consider how many times the name of a gene occurs in the names of genes within the same orthogroup, and we choose the most common one.</p></li>
+</ul>
+</div>
+<div class="section" id="does-all-variants-that-present-in-considered-set-of-genomes-are-represented-in-the-graph-visualization-form">
+<h2>Does all variants that present in considered set of genomes are represented in the graph visualization form?<a class="headerlink" href="#does-all-variants-that-present-in-considered-set-of-genomes-are-represented-in-the-graph-visualization-form" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Not always. GCB by default skips paralogues genes, but they can still be analysed by switching <code class="docutils literal notranslate"><span class="pre">Draw</span> <span class="pre">paralogues</span></code> toggle on left slide bar.</p></li>
+</ul>
+</div>
+<div class="section" id="where-should-i-take-coordinates-of-genes-of-interest">
+<h2>Where should I take coordinates of genes of interest?<a class="headerlink" href="#where-should-i-take-coordinates-of-genes-of-interest" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>from genome annotations (i.e. Genebank or RefSeq database) by searching for particular gene.</p></li>
+<li><p>DOOR database [Mao, Xizeng, et al., Nucleic acids research, 2014] (currently available <a class="reference external" href="http://161.117.81.224/DOOR3/">here</a> ) can be used to find information about operons of specific organism.</p></li>
+<li><p>from papers, in which genome coordinates are specified.</p></li>
+</ul>
+</div>
+<div class="section" id="how-can-i-obtain-graph-image-in-vector-format-for-publication">
+<h2>How can I obtain graph image in vector format for publication?<a class="headerlink" href="#how-can-i-obtain-graph-image-in-vector-format-for-publication" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Export graph to JSON (left panel-&gt;File-&gt;Graph-&gt;Download JSON), and then import it in a Cytoscape (File-&gt;Import-&gt;Network from File), or other graph editing software.</p></li>
+</ul>
+</div>
+<div class="section" id="what-if-genome-of-interest-is-absent-at-gcb-rcpcm-org">
+<h2>What if genome of interest is absent at gcb.rcpcm.org?<a class="headerlink" href="#what-if-genome-of-interest-is-absent-at-gcb-rcpcm-org" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>You should use standalone application in this case. Command-line tools are available <a class="reference external" href="https://github.com/DNKonanov/geneGraph">here</a>, local webserver is available <a class="reference external" href="https://github.com/DNKonanov/GCB">here</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="what-gene-sets-can-be-used-in-standalone-version">
+<h2>What gene sets can be used in standalone version?<a class="headerlink" href="#what-gene-sets-can-be-used-in-standalone-version" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>We recomend using phylogenetically narrow groups of genomes as input to the GCB analysis (species, and even better - clades of the phylogenetic tree consisting of several tens of genomes). In this case local variability of genomes is not confused by large-scale changes in the genome (e.g., inversions). If you have a genome of interest, it’s a good idea to take in addition to it 50-100 closest genomes.</p></li>
+</ul>
+</div>
+<div class="section" id="can-i-use-pc-for-the-standalone-analyisis-or-do-i-need-a-computational-cluster">
+<h2>Can I use PC for the standalone analyisis or do I need a computational cluster?<a class="headerlink" href="#can-i-use-pc-for-the-standalone-analyisis-or-do-i-need-a-computational-cluster" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In case of bacterial (not viral) genomes, it is recommended to run orthology inference on computational cluster. Analysis, downstream to orthgroups inference, can be run on standart PC. Local server application can be run on standart PC also.</p></li>
+</ul>
+</div>
+<div class="section" id="how-many-genomes-may-be-analyzed-in-a-standalone-version">
+<h2>How many genomes may be analyzed in a standalone version?<a class="headerlink" href="#how-many-genomes-may-be-analyzed-in-a-standalone-version" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>It depends on computational resources you have. If you have a computational cluster, then hundreds of genomes will be OK in most cases. If you have problems running analysis for your project feel free to contact us, we will try to help you (e.g., we can run orthology inference on our side).</p></li>
+</ul>
+</div>
+<div class="section" id="can-i-adress-someone-to-help-me-with-my-organisms">
+<h2>Can I adress someone to help me with my organisms?<a class="headerlink" href="#can-i-adress-someone-to-help-me-with-my-organisms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Please, write to the <a class="reference external" href="https://groups.google.com/forum/#!forum/genome-complexiity-browser">google group</a>.</p></li>
+</ul>
+</div>
 </div>
 
 
@@ -71,6 +124,25 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#what-is-this-curvulin-in-the-complexity-panel">What is this curvulin in the Complexity panel?</a></li>
+<li><a class="reference internal" href="#why-do-you-call-it-complexity-not-variability">Why do you call it complexity, not variability?</a></li>
+<li><a class="reference internal" href="#what-are-those-circles-and-lines-in-the-graph-panel">What are those circles and lines in the Graph panel?</a></li>
+<li><a class="reference internal" href="#how-node-name-is-selected">How node name is selected?</a></li>
+<li><a class="reference internal" href="#does-all-variants-that-present-in-considered-set-of-genomes-are-represented-in-the-graph-visualization-form">Does all variants that present in considered set of genomes are represented in the graph visualization form?</a></li>
+<li><a class="reference internal" href="#where-should-i-take-coordinates-of-genes-of-interest">Where should I take coordinates of genes of interest?</a></li>
+<li><a class="reference internal" href="#how-can-i-obtain-graph-image-in-vector-format-for-publication">How can I obtain graph image in vector format for publication?</a></li>
+<li><a class="reference internal" href="#what-if-genome-of-interest-is-absent-at-gcb-rcpcm-org">What if genome of interest is absent at gcb.rcpcm.org?</a></li>
+<li><a class="reference internal" href="#what-gene-sets-can-be-used-in-standalone-version">What gene sets can be used in standalone version?</a></li>
+<li><a class="reference internal" href="#can-i-use-pc-for-the-standalone-analyisis-or-do-i-need-a-computational-cluster">Can I use PC for the standalone analyisis or do I need a computational cluster?</a></li>
+<li><a class="reference internal" href="#how-many-genomes-may-be-analyzed-in-a-standalone-version">How many genomes may be analyzed in a standalone version?</a></li>
+<li><a class="reference internal" href="#can-i-adress-someone-to-help-me-with-my-organisms">Can I adress someone to help me with my organisms?</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="standalone.html"
                         title="previous chapter">Standalone version</a></p>

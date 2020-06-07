@@ -2,32 +2,64 @@
 Frequently Asked Questions
 ==========================
 
-What are those circles and lines in the graph form?
+What is this curvulin in the Complexity panel?
+----------------------------------------------
 
-How gene name is selected?
+- It is a local genome variability profile, which we call complexity profile. The higher the values, the more often changes occurs in this region of genome. By change we mean: gene insertions/deletions/translocations. Large-scale changes (e.g., large inversions) have little effect on complexity value; large scale means larger than the *window* parameter. Complexity profiles calculated with window values 20, 50, 100 are available at gcb.rcpcm.org, to obtain complexity profiles with other windows sizes you need to use stand-alone version.
+
+Why do you call it complexity, not variability?
+---------------------------------------------------
+
+- For two reasons. Firstly, only fixed variants are observed, so we measure not variability *per se*, but combination of genome variability and fitness cost of the genome changes. Secondly, not only the quantity, but also the pattern of the changes contributes to the complexity value. The more overlapping changes occur, the greater their contribution.
+
+What are those circles and lines in the Graph panel?
+-----------------------------------------------------
+
+- Circles correspond to the genes, or more precisely, to the orthogroups, inferred from the set of genomes. Lines (graph edges) connects genes, which are adjacent in at least one of the genomes (the larger the number of genomes these genes are located next to each other, the thicker the line).
+
+How node name is selected?
+-----------------------------------------------------
+
+- By majority rule. We consider how many times the name of a gene occurs in the names of genes within the same orthogroup, and we choose the most common one.
 
 Does all variants that present in considered set of genomes are represented in the graph visualization form? 
+-------------------------------------------------------------------------------------------------------------------
 
-- Not always. GCB by default skips paralogues genes, but they can still be analysed by switching ``Draw paralogues`` toggle on top panel.  
+- Not always. GCB by default skips paralogues genes, but they can still be analysed by switching ``Draw paralogues`` toggle on left slide bar.  
 
 Where should I take coordinates of genes of interest?
+-------------------------------------------------------------------------------------------------------------------
+
 - from genome annotations (i.e. Genebank or RefSeq database) by searching for particular gene.
 - DOOR database [Mao, Xizeng, et al., Nucleic acids research, 2014] (currently available `here <http://161.117.81.224/DOOR3/>`_ ) can be used to find information about operons of specific organism.
 - from papers, in which genome coordinates are specified.
 
 How can I obtain graph image in vector format for publication?
-- Export it to JSON and then open it in a Cytoscape or other graph editing software.
+-------------------------------------------------------------------------------------------------------------------
+
+- Export graph to JSON (left panel->File->Graph->Download JSON), and then import it in a Cytoscape (File->Import->Network from File), or other graph editing software.
 
 What if genome of interest is absent at gcb.rcpcm.org?
+-------------------------------------------------------------------------------------------------------------------
+
+- You should use standalone application in this case. Command-line tools are available `here <https://github.com/DNKonanov/geneGraph>`_, local webserver is available `here <https://github.com/DNKonanov/GCB>`_. 
+
+What gene sets can be used in standalone version?
+--------------------------------------------------
+
+- We recomend using phylogenetically narrow groups of genomes as input to the GCB analysis (species, and even better - clades of the phylogenetic tree consisting of several tens of genomes). In this case local variability of genomes is not confused by large-scale changes in the genome (e.g., inversions). If you have a genome of interest, it’s a good idea to take in addition to it 50-100 closest genomes.
 
 Can I use PC for the standalone analyisis or do I need a computational cluster?
+-------------------------------------------------------------------------------------------------------------------
+
+- In case of bacterial (not viral) genomes, it is recommended to run orthology inference on computational cluster. Analysis, downstream to orthgroups inference, can be run on standart PC. Local server application can be run on standart PC also.
 
 How many genomes may be analyzed in a standalone version?
+-------------------------------------------------------------------------------------------------------------------
 
+- It depends on computational resources you have. If you have a computational cluster, then hundreds of genomes will be OK in most cases. If you have problems running analysis for your project feel free to contact us, we will try to help you (e.g., we can run orthology inference on our side).
 
 Can I adress someone to help me with my organisms?
+-------------------------------------------------------------------------------------------------------------------
 
-- You can write to the `google group <https://groups.google.com/forum/#!forum/genome-complexiity-browser>`_. We will be hapy to help you.
-
-Why should I run several python scripts insted of one in a standalone version?
-- you may choose different references. Only complexity values for the selected reference are added to database. Usually we have one or several genomes of particular interest or of good quality which may become references. Computation of complexity values for each genome in a set to 
+- Please, write to the `google group <https://groups.google.com/forum/#!forum/genome-complexiity-browser>`_.
