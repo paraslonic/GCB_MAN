@@ -5,34 +5,13 @@ GUI description
 GUI elements
 ##############
 
-GCB page consists of three main parts: 1) top panel to select genome and region to work with, 2) complexity plot which shows complexity profile for selected genome and contig, 3) subgraph visualization form.
+GCB page consists of three main parts: 1) complexity plot which shows complexity profile for selected genome and contig, 2) subgraph visualization of selected genome region, 3) left sliding panel to select genome and region to work with, search gene product names, download complexity values and graph.
 
-The **top panel** allows selecting one of the precalculated organisms, reference genome and contig (replicon for finished assemblies). The right side of the panel allows selecting the region of the genome for the subgraph visualization. User can specify the start and end coordinates of the region. OG identifiers (which can be taken from the subgraph visualization) can also be used to define a range. Draw paralogues option changes the default program behavior which is to ignore genes which have paralogues. When this option is switched ON,  orhologization of paralogous genes is applied to draw subgraph and calculate complexity. By default,  paralogous genes are not displayed and not contribute to complexity value.
-
-.. image:: img/face/face1.png
+.. image:: img/face/annotated_screen.png
         :align:   center
 
-**Complexity plot** panel shows a visualization of complexity profile and allows a user to visualize custom data (GC content, pathogenicity islands, prophage regions, sequence motifs, etc.). Complexity profile can be downloaded as a text file. User can add custom features file, in which each line should be in the format:  <genome position> <numeric value>
 
-.. image:: img/face/face2.png
-        :align:   center
-
-**Subgraph visualization** form contains a number of settings to simplify and customize subgraph. On the bottom, there is information about edges (which genomes contain the corresponding edge) and nodes (gene product).
-
-.. image:: img/face/face3.png
-        :align:   center
-
-To explain parameters of visualization let's consider subgraph construction procedure: 1) nodes of the reference genome in selected region (+/- *window* ) are added, this is called base chain; 2) all paths which connect with the base chain are added to subgraph; 3) paths which start and end on the base chain and which have length <= *Depth* remain unchanged; 4) all other paths are cropped to the *Tails* length; 5) edges with number of genomes (weight) lower than *minimal edge* weight are removed from the subgraph.
-
-By clicking on the edge user selects this edge. List of genomes which contain gene pair corresponding to the selected edge is shown on the information panel. Edges which have at least one of the genomes from this list are colored blue.
-
-User can upload colors for the nodes from the current subgraph. Each line of this file should be in the format:<OG id> <hex color code>::
-
-	OG000004 #ff0000
-	OG000005 #777777
-
-
-Step-by-step tutorials
+Tutorials
 #######################
 
 Complexity analysis
@@ -129,7 +108,16 @@ This more complicated graph comes from not ignoring paralogous genes as it done 
 Combined analysis
 ------------------
 
-With GCB, you can find which genes are in the hot spots of genome variability. To do this, first select an organism, strain and replicon (chromosome or plasmids, complete genomes are reccomended to be used as reference). Then, in complexity profile panel, click on some of the hot spots to set the current position (depicted with vertical line in the complexity plot and also in ``Start`` and ``End`` coordinates in the left sliding panel). Before proceding to the graph visualization, we recommend adjusting graph rendering options: set ``Minimal edge value`` to 10 (the more intense the hostpot, the bigger this value should be), ``Window`` to 10-20, depending on the hotspot width.  Now press the ``DRAW GRAH`` button in the upper left corner of the *Complexity* panel. Changing colors will be visible above the graph draw buttons while it is being built, and then graph will apear in the *Grpah* panel. To select several genes, for example, located at the variable region, press the left mouse button and holding it move the cursor to surround the desired genes. Their products will apear in the bottom right part of the **Graph** panel.
+With GCB, you can find which genes are in the hot spots of genome variability. 
+
+To do this, first select an organism, strain and replicon (chromosome or plasmids, complete genomes are reccomended to be used as reference).
+
+Then, in complexity profile panel, click on some of the hot spots to set the current position. Current position is marked with vertical line in the complexity plot and also in ``Start`` and ``End`` coordinates in the left sliding panel). 
+
+Before proceding to the graph visualization, we recommend adjusting graph rendering options: set ``Minimal edge value`` to 10 (the more intense the hostpot, the bigger this value should be), ``Window`` to 10-20, depending on the hotspot width.  Now press the ``DRAW GRAH`` button in the upper left corner of the *Complexity* panel. Changing colors will be visible above the graph draw buttons while it is being built, and then graph will apear in the *Grpah* panel.
+
+To select some genes, for example, located at the variable region, press the left mouse button and while holding it move the cursor to surround the desired genes. Their products will apear in the bottom right part of the **Graph** panel.
+
 
 
 Publication-ready graph rendering

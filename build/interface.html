@@ -44,23 +44,11 @@
 <h1>GUI description<a class="headerlink" href="#gui-description" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="gui-elements">
 <h2>GUI elements<a class="headerlink" href="#gui-elements" title="Permalink to this headline">¶</a></h2>
-<p>GCB page consists of three main parts: 1) top panel to select genome and region to work with, 2) complexity plot which shows complexity profile for selected genome and contig, 3) subgraph visualization form.</p>
-<p>The <strong>top panel</strong> allows selecting one of the precalculated organisms, reference genome and contig (replicon for finished assemblies). The right side of the panel allows selecting the region of the genome for the subgraph visualization. User can specify the start and end coordinates of the region. OG identifiers (which can be taken from the subgraph visualization) can also be used to define a range. Draw paralogues option changes the default program behavior which is to ignore genes which have paralogues. When this option is switched ON,  orhologization of paralogous genes is applied to draw subgraph and calculate complexity. By default,  paralogous genes are not displayed and not contribute to complexity value.</p>
-<img alt="_images/face1.png" class="align-center" src="_images/face1.png" />
-<p><strong>Complexity plot</strong> panel shows a visualization of complexity profile and allows a user to visualize custom data (GC content, pathogenicity islands, prophage regions, sequence motifs, etc.). Complexity profile can be downloaded as a text file. User can add custom features file, in which each line should be in the format:  &lt;genome position&gt; &lt;numeric value&gt;</p>
-<img alt="_images/face2.png" class="align-center" src="_images/face2.png" />
-<p><strong>Subgraph visualization</strong> form contains a number of settings to simplify and customize subgraph. On the bottom, there is information about edges (which genomes contain the corresponding edge) and nodes (gene product).</p>
-<img alt="_images/face3.png" class="align-center" src="_images/face3.png" />
-<p>To explain parameters of visualization let’s consider subgraph construction procedure: 1) nodes of the reference genome in selected region (+/- <em>window</em> ) are added, this is called base chain; 2) all paths which connect with the base chain are added to subgraph; 3) paths which start and end on the base chain and which have length &lt;= <em>Depth</em> remain unchanged; 4) all other paths are cropped to the <em>Tails</em> length; 5) edges with number of genomes (weight) lower than <em>minimal edge</em> weight are removed from the subgraph.</p>
-<p>By clicking on the edge user selects this edge. List of genomes which contain gene pair corresponding to the selected edge is shown on the information panel. Edges which have at least one of the genomes from this list are colored blue.</p>
-<p>User can upload colors for the nodes from the current subgraph. Each line of this file should be in the format:&lt;OG id&gt; &lt;hex color code&gt;:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OG000004</span> <span class="c1">#ff0000</span>
-<span class="n">OG000005</span> <span class="c1">#777777</span>
-</pre></div>
+<p>GCB page consists of three main parts: 1) complexity plot which shows complexity profile for selected genome and contig, 2) subgraph visualization of selected genome region, 3) left sliding panel to select genome and region to work with, search gene product names, download complexity values and graph.</p>
+<img alt="_images/annotated_screen.png" class="align-center" src="_images/annotated_screen.png" />
 </div>
-</div>
-<div class="section" id="step-by-step-tutorials">
-<h2>Step-by-step tutorials<a class="headerlink" href="#step-by-step-tutorials" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tutorials">
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="complexity-analysis">
 <h3>Complexity analysis<a class="headerlink" href="#complexity-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Complexity is the measure of local genome variability. It is calculated for a set of genomes, one of which is selected as a reference. The greater the number of local changes in a certain neighborhood, the greater the value of complexity. Locality is set by the parameter <code class="docutils literal notranslate"><span class="pre">Window</span></code>, the larger it is, the more large-scale changes influences complexity value.</p>
@@ -129,7 +117,11 @@ One of the operon’s genes is absent in some set of genomes. By left clicking o
 </div>
 <div class="section" id="combined-analysis">
 <h3>Combined analysis<a class="headerlink" href="#combined-analysis" title="Permalink to this headline">¶</a></h3>
-<p>With GCB, you can find which genes are in the hot spots of genome variability. To do this, first select an organism, strain and replicon (chromosome or plasmids, complete genomes are reccomended to be used as reference). Then, in complexity profile panel, click on some of the hot spots to set the current position (depicted with vertical line in the complexity plot and also in <code class="docutils literal notranslate"><span class="pre">Start</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span></code> coordinates in the left sliding panel). Before proceding to the graph visualization, we recommend adjusting graph rendering options: set <code class="docutils literal notranslate"><span class="pre">Minimal</span> <span class="pre">edge</span> <span class="pre">value</span></code> to 10 (the more intense the hostpot, the bigger this value should be), <code class="docutils literal notranslate"><span class="pre">Window</span></code> to 10-20, depending on the hotspot width.  Now press the <code class="docutils literal notranslate"><span class="pre">DRAW</span> <span class="pre">GRAH</span></code> button in the upper left corner of the <em>Complexity</em> panel. Changing colors will be visible above the graph draw buttons while it is being built, and then graph will apear in the <em>Grpah</em> panel. To select several genes, for example, located at the variable region, press the left mouse button and holding it move the cursor to surround the desired genes. Their products will apear in the bottom right part of the <strong>Graph</strong> panel.</p>
+<p>With GCB, you can find which genes are in the hot spots of genome variability.</p>
+<p>To do this, first select an organism, strain and replicon (chromosome or plasmids, complete genomes are reccomended to be used as reference).</p>
+<p>Then, in complexity profile panel, click on some of the hot spots to set the current position. Current position is marked with vertical line in the complexity plot and also in <code class="docutils literal notranslate"><span class="pre">Start</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span></code> coordinates in the left sliding panel).</p>
+<p>Before proceding to the graph visualization, we recommend adjusting graph rendering options: set <code class="docutils literal notranslate"><span class="pre">Minimal</span> <span class="pre">edge</span> <span class="pre">value</span></code> to 10 (the more intense the hostpot, the bigger this value should be), <code class="docutils literal notranslate"><span class="pre">Window</span></code> to 10-20, depending on the hotspot width.  Now press the <code class="docutils literal notranslate"><span class="pre">DRAW</span> <span class="pre">GRAH</span></code> button in the upper left corner of the <em>Complexity</em> panel. Changing colors will be visible above the graph draw buttons while it is being built, and then graph will apear in the <em>Grpah</em> panel.</p>
+<p>To select some genes, for example, located at the variable region, press the left mouse button and while holding it move the cursor to surround the desired genes. Their products will apear in the bottom right part of the <strong>Graph</strong> panel.</p>
 </div>
 <div class="section" id="publication-ready-graph-rendering">
 <h3>Publication-ready graph rendering<a class="headerlink" href="#publication-ready-graph-rendering" title="Permalink to this headline">¶</a></h3>
@@ -149,7 +141,7 @@ JPEG file stores only a bitmap image, while JSON file contains all infromation r
   <ul>
 <li><a class="reference internal" href="#">GUI description</a><ul>
 <li><a class="reference internal" href="#gui-elements">GUI elements</a></li>
-<li><a class="reference internal" href="#step-by-step-tutorials">Step-by-step tutorials</a><ul>
+<li><a class="reference internal" href="#tutorials">Tutorials</a><ul>
 <li><a class="reference internal" href="#complexity-analysis">Complexity analysis</a></li>
 <li><a class="reference internal" href="#gene-neigborhood-analysis">Gene neigborhood analysis</a></li>
 <li><a class="reference internal" href="#combined-analysis">Combined analysis</a></li>
