@@ -5,10 +5,22 @@ GUI description
 GUI elements
 ##############
 
-GCB page consists of three main parts: 1) complexity plot which shows complexity profile for selected genome and contig, 2) subgraph visualization of selected genome region, 3) left sliding panel to select genome and region to work with, search gene product names, download complexity values and graph.
+GCB page consists of three main parts:
+
+        - Complexity plot which shows complexity profile for selected genome and contig
+        
+        - Subgraph visualization of selected genome region 
+        
+        - Left sliding panel to:
+
+                - select genome and region to work with
+                - search gene product names
+                - download complexity values and graph.
+
 
 .. image:: img/face/annotated_screen.png
-        :align:   center
+        :align: center
+        :scale: 20 %
 
 
 Tutorials

@@ -5,10 +5,22 @@ GUI description
 GUI elements
 ##############
 
-GCB page consists of three main parts: 1) complexity plot which shows complexity profile for selected genome and contig, 2) subgraph visualization of selected genome region, 3) left sliding panel to select genome and region to work with, search gene product names, download complexity values and graph.
+GCB page consists of three main parts:
+
+        - Complexity plot which shows complexity profile for selected genome and contig
+        
+        - Subgraph visualization of selected genome region 
+        
+        - Left sliding panel to:
+
+                - select genome and region to work with
+                - search gene product names
+                - download complexity values and graph.
+
 
 .. image:: img/face/annotated_screen.png
-        :align:   center
+        :align: center
+        :scale: 20 %
 
 
 Tutorials
@@ -19,9 +31,11 @@ Complexity analysis
 
 Complexity is the measure of local genome variability. It is calculated for a set of genomes, one of which is selected as a reference. The greater the number of local changes in a certain neighborhood, the greater the value of complexity. Locality is set by the parameter ``Window``, the larger it is, the more large-scale changes influences complexity value.
 
-Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version.
+Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. 
 
-To obtain the complexity profile for a certain set of genomes (we will consider the set of *Bacillus Subtilus* available at gcb.rcpcm.org, follow these steps:
+At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). 
+
+To obtain the complexity profile for a certain set of genomes (we will consider the set of *Bacillus Subtilus* available at gcb.rcpcm.org), follow these steps:
 
 (1) Open gcb.rcpcm.org in you web-browser.
 
@@ -49,8 +63,7 @@ A number of peaks and flat areas are visible in the complexity profile. Peaks co
 
 (7) To get the numerical values of the complexity profile, open left sliding panel, select the *File* tab at the top of the panel, click ``Download complexity values`` button. 
 
-Screen recording with these steps is available `here <https://youtu.be/q122j3pbcko>`_.
-
+Screen recording with these steps performed is available `here <https://youtu.be/q122j3pbcko>`_.
 
 
 Gene neigborhood analysis

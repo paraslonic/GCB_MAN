@@ -44,16 +44,32 @@
 <h1>GUI description<a class="headerlink" href="#gui-description" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="gui-elements">
 <h2>GUI elements<a class="headerlink" href="#gui-elements" title="Permalink to this headline">¶</a></h2>
-<p>GCB page consists of three main parts: 1) complexity plot which shows complexity profile for selected genome and contig, 2) subgraph visualization of selected genome region, 3) left sliding panel to select genome and region to work with, search gene product names, download complexity values and graph.</p>
-<img alt="_images/annotated_screen.png" class="align-center" src="_images/annotated_screen.png" />
+<p>GCB page consists of three main parts:</p>
+<blockquote>
+<div><ul>
+<li><p>Complexity plot which shows complexity profile for selected genome and contig</p></li>
+<li><p>Subgraph visualization of selected genome region</p></li>
+<li><p>Left sliding panel to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>select genome and region to work with</p></li>
+<li><p>search gene product names</p></li>
+<li><p>download complexity values and graph.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<a class="reference internal image-reference" href="_images/annotated_screen.png"><img alt="_images/annotated_screen.png" class="align-center" src="_images/annotated_screen.png" style="width: 504.8px; height: 560.8000000000001px;" /></a>
 </div>
 <div class="section" id="tutorials">
 <h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="complexity-analysis">
 <h3>Complexity analysis<a class="headerlink" href="#complexity-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Complexity is the measure of local genome variability. It is calculated for a set of genomes, one of which is selected as a reference. The greater the number of local changes in a certain neighborhood, the greater the value of complexity. Locality is set by the parameter <code class="docutils literal notranslate"><span class="pre">Window</span></code>, the larger it is, the more large-scale changes influences complexity value.</p>
-<p>Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version.</p>
-<p>To obtain the complexity profile for a certain set of genomes (we will consider the set of <em>Bacillus Subtilus</em> available at gcb.rcpcm.org, follow these steps:</p>
+<p>Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel.</p>
+<p>At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version).</p>
+<p>To obtain the complexity profile for a certain set of genomes (we will consider the set of <em>Bacillus Subtilus</em> available at gcb.rcpcm.org), follow these steps:</p>
 <ol class="arabic simple">
 <li><p>Open gcb.rcpcm.org in you web-browser.</p></li>
 </ol>
@@ -87,7 +103,7 @@
 <ol class="arabic simple" start="7">
 <li><p>To get the numerical values of the complexity profile, open left sliding panel, select the <em>File</em> tab at the top of the panel, click <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">complexity</span> <span class="pre">values</span></code> button.</p></li>
 </ol>
-<p>Screen recording with these steps is available <a class="reference external" href="https://youtu.be/q122j3pbcko">here</a>.</p>
+<p>Screen recording with these steps performed is available <a class="reference external" href="https://youtu.be/q122j3pbcko">here</a>.</p>
 </div>
 <div class="section" id="gene-neigborhood-analysis">
 <h3>Gene neigborhood analysis<a class="headerlink" href="#gene-neigborhood-analysis" title="Permalink to this headline">¶</a></h3>
