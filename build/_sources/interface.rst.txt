@@ -68,24 +68,34 @@ Then we should put the operon's margin coordinates to text fields: ``Start coord
 .. image:: img/tutorial/use1/use1_2.png
         :scale: 80 %
 
-Now we click ``DRAW GRAPH`` button on the bottom panel and graph representation of the operon appears. 
+Now click ``DRAW GRAPH`` button and graph-based representation of the operon will appear in *Graph* panel.
 
 .. image:: img/tutorial/use1/use1_3.png
 
-Note that edges are of different colors in the graph: black and red. Shown in red are edges from the reference genome, all other edges are black, they correspond to genes neighbourhood variants not present in a reference genome. 
+Gray rectangle is drawn around nodes located between ``Start coordinate`` and ``End coordinate`` (lac operon genes in this case). 
 
-Nodes have different colors too. Nodes of reference genome genes are colored red if they are located inbetween ``Start coordinate - neigbhourhood`` and ``End coordinate + neigbhourhood``; they are colored pink if they are present in a reference genome, but are located outside the mentioned region. Nodes of genes, that are absent in a reference genome, are colored green. Gray rectangle is drawn around nodes located between ``Start coordinate`` and ``End coordinate`` (lac operon genes in this case). 
+Note that edges are of different colors. Red edges are from the reference genome (and also from genomes in which genes are located in the same order), black edges correspond to variants not present in the reference genome. 
+
+Nodes also have different colors. Nodes of genes from the reference genome are colored red, if they are located inbetween ``Start coordinate - neigbhourhood`` and ``End coordinate + neigbhourhood``; they are colored pink, if present in the reference genome, but located outside the mentioned region. Nodes of genes, that are absent in a reference genome, are colored green. 
 
 More clear layout can be obtained manually by left clicking and dragging nodes with mouse.
 
 .. image:: img/tutorial/use1/use4_.png
 
-We can see now that operon is located in a conserved context in most of the genomes (thick edges designated with 1 and 2).
-One of the operon’s genes is absent in some set of genomes. By left clicking on that gene we can select it and know its gene product. Gene products are assigned with `Prokka <https://github.com/tseemann/prokka>`__ tool in the web version of GCB. 
+By looking at thick edges designated with 1 and 2, we can tell that operon is located in a conserved context, in most of the genomes.
+
+One of the operon’s genes is absent in some set of genomes. By left clicking on that gene, we can select it, and know its gene product (gene products are assigned with `Prokka <https://github.com/tseemann/prokka>`__). 
 
 .. image:: img/tutorial/use1/select_node.gif
 
-In our case, Galactoside acetyltransferase is missing from the operon in some genomes. What are that genomes? By clicking on the bypassing edge, we will select this edge. Selection of the edge results in two effects: 1) names of genomes corresponding to this edge appears in the ``List of genomes`` section below the graph, 2) other edges, taht contain at least one of the genomes from the selected edge are colored blue. In this way, one can determine possible variants of gene neigbhourhoods, and in which genomes they are present. 
+Missing gene is Galactoside acetyltransferase. This gene is not in operons of a number of genomes. what are that genomes? 
+
+By clicking on the bypassing edge we select this edge. 
+Selection of the edge results in two effects:
+         
+         1) names of genomes corresponding to this edge appears in the ``List of genomes`` section below the graph 
+         
+         2) other edges, that contain at least one of the genomes from the selected edge, are colored blue. In this way, one can determine possible variants of gene neigbhorhoods, and in which genomes they are present. 
 
 .. image:: img/tutorial/use1/select_edge.gif
 
