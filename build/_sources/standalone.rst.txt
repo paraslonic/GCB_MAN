@@ -28,6 +28,8 @@ Installation instrctions are `here <https://snakemake.readthedocs.io/en/stable/g
 
 **Python 3.4 or later**
 
+Comes with conda.
+
 **Graphviz and pygraphviz libraries**
 
 Can be installed by running::
@@ -122,6 +124,15 @@ Advanced complexity estimation algorithm settings (practically not used):
 
 	``--max_depth`` -- maximum length of deviating path (default is inf)
  
+What this command does:
+
+	* parses `OrthoGroups.txt`
+	* creates graph file in sif-format and additional information about genes, their contextes, etc.
+	* creates SQLite database used in GCB
+	* computes complexity profiles for ALL genomes in the dataset and fills the DB
+	* dumps graph object for fast access
+	* all operations are executed by two ways: with deletion of paralogues, and with artificial orthologization
+
 Main output files are:
 
 	- :file:`<output>.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
@@ -135,3 +146,48 @@ Where, ``<output>`` is what was specifiend in ``-o`` option, while running `gg.p
 
 Local GCB server 
 ##################
+
+Installation 
+-------------
+
+First, clone or donload git repository::
+
+	git clone https://github.com/DNKonanov/GCB.git
+
+Then, install dependencies::
+
+	sudo apt-get install graphviz graphviz-dev python3-graphviz python3-pygraphviz
+
+	pip3 install -r requirements.txt
+
+	git clone https://github.com/paraslonic/orthosnake
+
+	git clone https://github.com/DNKonanov/geneGraph
+
+Usage
+------
+
+**Add data**
+
+To generate a dataset for GCB you need to run `GeneGraph <https://github.com/DNKonanov/geneGraph>`_, a command-line tool to generate graphs and complexity profiles.
+
+Suppose, we have a number of ``*.fna`` files for 100 different genomes of Mycoplasma. 
+
+First, orthogroup file ``OrthoGroups.txt`` should be generated with `orthosnake <https://github.com/paraslonic/orthosnake>`_. ``OrthoGroups.txt`` will be in ``orthosnake/Results`` folder. 
+
+Next, use ``gg.py`` script from geneGraph to generate GCB databases::
+
+	python gg.py -i [path to OrthoGroups.txt] -o Mycoplasma
+
+
+Now move the created ``Mycoplasma`` folder to ``GCB/data``. If there is no ``data`` folder in ``GCB`` root folder, just create it with ``mkdir data``.
+
+**Start server**
+
+To start GCB server on your computer type in GCB_package folder this::
+
+	python3 gcb_server.py
+
+Open **127.0.0.1:8000** or **localhost:8000** in your web-browser and use GCB.
+
+Restarting of the sever is needed every time you add a new dataset.

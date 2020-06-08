@@ -57,6 +57,7 @@ Command-line scripts are provided to: calculate complexity profile, generate sub
 <p><strong>Snakemake</strong></p>
 <p>Installation instrctions are <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/getting_started/installation.html">here</a>.</p>
 <p><strong>Python 3.4 or later</strong></p>
+<p>Comes with conda.</p>
 <p><strong>Graphviz and pygraphviz libraries</strong></p>
 <p>Can be installed by running:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span> <span class="n">python3</span><span class="o">-</span><span class="n">graphviz</span> <span class="n">python3</span><span class="o">-</span><span class="n">pygraphviz</span>
@@ -144,6 +145,17 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <p><code class="docutils literal notranslate"><span class="pre">--min_depth</span></code> – minimum length of deviating path (default is 0)</p>
 <p><code class="docutils literal notranslate"><span class="pre">--max_depth</span></code> – maximum length of deviating path (default is inf)</p>
 </div></blockquote>
+<p>What this command does:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>parses <cite>OrthoGroups.txt</cite></p></li>
+<li><p>creates graph file in sif-format and additional information about genes, their contextes, etc.</p></li>
+<li><p>creates SQLite database used in GCB</p></li>
+<li><p>computes complexity profiles for ALL genomes in the dataset and fills the DB</p></li>
+<li><p>dumps graph object for fast access</p></li>
+<li><p>all operations are executed by two ways: with deletion of paralogues, and with artificial orthologization</p></li>
+</ul>
+</div></blockquote>
 <p>Main output files are:</p>
 <blockquote>
 <div><ul class="simple">
@@ -159,6 +171,42 @@ We recomend using our <a class="reference external" href="https://github.com/par
 </div>
 <div class="section" id="local-gcb-server">
 <h2>Local GCB server<a class="headerlink" href="#local-gcb-server" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>First, clone or donload git repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DNKonanov</span><span class="o">/</span><span class="n">GCB</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Then, install dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span> <span class="n">graphviz</span><span class="o">-</span><span class="n">dev</span> <span class="n">python3</span><span class="o">-</span><span class="n">graphviz</span> <span class="n">python3</span><span class="o">-</span><span class="n">pygraphviz</span>
+
+<span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paraslonic</span><span class="o">/</span><span class="n">orthosnake</span>
+
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DNKonanov</span><span class="o">/</span><span class="n">geneGraph</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<p><strong>Add data</strong></p>
+<p>To generate a dataset for GCB you need to run <a class="reference external" href="https://github.com/DNKonanov/geneGraph">GeneGraph</a>, a command-line tool to generate graphs and complexity profiles.</p>
+<p>Suppose, we have a number of <code class="docutils literal notranslate"><span class="pre">*.fna</span></code> files for 100 different genomes of Mycoplasma.</p>
+<p>First, orthogroup file <code class="docutils literal notranslate"><span class="pre">OrthoGroups.txt</span></code> should be generated with <a class="reference external" href="https://github.com/paraslonic/orthosnake">orthosnake</a>. <code class="docutils literal notranslate"><span class="pre">OrthoGroups.txt</span></code> will be in <code class="docutils literal notranslate"><span class="pre">orthosnake/Results</span></code> folder.</p>
+<p>Next, use <code class="docutils literal notranslate"><span class="pre">gg.py</span></code> script from geneGraph to generate GCB databases:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">gg</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">OrthoGroups</span><span class="o">.</span><span class="n">txt</span><span class="p">]</span> <span class="o">-</span><span class="n">o</span> <span class="n">Mycoplasma</span>
+</pre></div>
+</div>
+<p>Now move the created <code class="docutils literal notranslate"><span class="pre">Mycoplasma</span></code> folder to <code class="docutils literal notranslate"><span class="pre">GCB/data</span></code>. If there is no <code class="docutils literal notranslate"><span class="pre">data</span></code> folder in <code class="docutils literal notranslate"><span class="pre">GCB</span></code> root folder, just create it with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">data</span></code>.</p>
+<p><strong>Start server</strong></p>
+<p>To start GCB server on your computer type in GCB_package folder this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">gcb_server</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Open <strong>127.0.0.1:8000</strong> or <strong>localhost:8000</strong> in your web-browser and use GCB.</p>
+<p>Restarting of the sever is needed every time you add a new dataset.</p>
+</div>
 </div>
 </div>
 
@@ -178,7 +226,11 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <li><a class="reference internal" href="#building-a-graph-and-complexity-estimation-with-a-single-command">Building a graph and complexity estimation with a single command</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#local-gcb-server">Local GCB server</a></li>
+<li><a class="reference internal" href="#local-gcb-server">Local GCB server</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

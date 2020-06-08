@@ -156,6 +156,6 @@ JPEG file stores only a bitmap image, JSON file contains all infromation regardi
 
 JSON file can be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). 
 
-To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
+To import JSON graph file into Cytoscape, select ``File`` - ``Import`` - ``Network from File`` and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
 
 
