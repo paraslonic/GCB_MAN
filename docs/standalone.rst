@@ -2,8 +2,8 @@
 Standalone version 
 ==============================================
 
-Command-line tools 
-####################################
+Command-line tool
+##################
 
 Roadmap
 -------
@@ -18,24 +18,28 @@ Command-line scripts are provided to: calculate complexity profile, generate sub
 Prerequisites
 -------------
 
-* Conda
+**Conda**
 
 Please refer to the `installation guide <https://docs.conda.io/projects/conda/en/latest/user-guide/install/>`_.
 
-* Snakemake
+**Snakemake**
 
-	Can be installed vie conda by
-	``
+Installation instrctions are `here <https://snakemake.readthedocs.io/en/stable/getting_started/installation.html>`_.
 
-* Python 3.4 or later
+**Python 3.4 or later**
 
-* Graphviz and pygraphviz libraries
+**Graphviz and pygraphviz libraries**
 
 Can be installed by running::
-    `sudo apt-get install graphviz python3-graphviz python3-pygraphviz` or by `conda install`
 
+    sudo apt-get install graphviz python3-graphviz python3-pygraphviz
 
-* gene_graph_lib Python3 module
+or via conda::
+	
+	conda install -c anaconda graphviz
+	conda install -c anaconda pygraphviz
+
+**gene_graph_lib Python3 module**
 
 Can be installed by running::
 
@@ -120,9 +124,14 @@ Advanced complexity estimation algorithm settings (practically not used):
  
 Main output files are:
 
-	- :file:`<prefix>.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
-	- :file:`<prefix>_pars.db` - SQLite database conatining graph and complexity values, paralogues genes are orthologized.
+	- :file:`<output>.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
+	- :file:`<output>_pars.db` - SQLite database conatining graph and complexity values, paralogues genes are orthologized.
 	- :file:`[reference genome]/prob_window_complexity_contig_[contig].txt` - text file containing complexity values for each contig in the reference genome. 
-	- :file:`<prefix>_context.sif` - number of unique contexts, computed for each node in graph
-	- :file:`<prefix>_genes.sif` - list of all genes (nodes) from all genomes, with coordinates and Prokka annotations
+	- :file:`<output>_context.sif` - number of unique contexts, computed for each node in graph
+	- :file:`<output>_genes.sif` - list of all genes (nodes) from all genomes, with coordinates and Prokka annotations
 
+Where, ``<output>`` is what was specifiend in ``-o`` option, while running `gg.py`.
+
+
+Local GCB server 
+##################

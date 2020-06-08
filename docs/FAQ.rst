@@ -44,6 +44,11 @@ What if genome of interest is absent at gcb.rcpcm.org?
 
 - You should use standalone application in this case. Command-line tools are available `here <https://github.com/DNKonanov/geneGraph>`_, local webserver is available `here <https://github.com/DNKonanov/GCB>`_. 
 
+Can I run standalone version on Windows?
+----------------------------------------
+
+- Most likely yes, but it will not be easy if you do not have a Python and conda already installed. We only tested standalone version of GCB on different Linux distributives (Ubuntu, CentOS).
+
 What gene sets can be used in standalone version?
 --------------------------------------------------
 

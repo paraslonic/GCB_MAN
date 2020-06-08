@@ -63,9 +63,46 @@
 <h2>Step-by-step tutorials<a class="headerlink" href="#step-by-step-tutorials" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="complexity-analysis">
 <h3>Complexity analysis<a class="headerlink" href="#complexity-analysis" title="Permalink to this headline">¶</a></h3>
+<p>Complexity is the measure of local genome variability. It is calculated for a set of genomes, one of which is selected as a reference. The greater the number of local changes in a certain neighborhood, the greater the value of complexity. Locality is set by the parameter <code class="docutils literal notranslate"><span class="pre">Window</span></code>, the larger it is, the more large-scale changes influences complexity value.</p>
+<p>Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version.</p>
+<p>To obtain the complexity profile for a certain set of genomes (we will consider the set of <em>Bacillus Subtilus</em> available at gcb.rcpcm.org, follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Open gcb.rcpcm.org in you web-browser.</p></li>
+</ol>
+<blockquote>
+<div><p>Left panel with a number of settings will open automatically.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Organism</span></code> selector and choose <code class="docutils literal notranslate"><span class="pre">Bacillus_subtilis</span></code> item.</p></li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Reference</span></code> selector and choose one of the available genomes. Let’s choose for example <code class="docutils literal notranslate"><span class="pre">GCF_001889385.1_ASM188938v1_genomic</span> <span class="pre">(J-5)</span></code> genome.</p></li>
+</ol>
+<blockquote>
+<div><p>Genome name is constructed based on its filename (NCBI RefSeq filenames are used in the web version, genomes were downloaded from NCBI FTP server). In the web version strain name from the RefSeq is added to this name in brackets.</p>
+</div></blockquote>
+<ol class="arabic simple" start="4">
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">Reference</span></code> selector.</p></li>
+</ol>
+<blockquote>
+<div><p>The contigs of the selected genome will be shown. For complete (finished) genomes they corresponds to replicones (chromosome(s) and plasmids), for draft genomes they are some fragments of genome. You cannot see the complexity profile for all contigs at the same time, they must be selected in turn.</p>
+<p>In case of <code class="docutils literal notranslate"><span class="pre">J-5</span></code> genome, only one contig is present (<code class="docutils literal notranslate"><span class="pre">NZ_CP018295.1</span></code>), which means that it is a complete (finished) genome, with single chromosome and without plasmids.</p>
+</div></blockquote>
+<ol class="arabic simple" start="5">
+<li><p>Close left sliding panel by clicking on the some point outside it (e.g., on the middle of the page).</p></li>
+</ol>
+<blockquote>
+<div><p>To open this panel once again, click on the icon with three horizontal lines on the left side of the page.</p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Complexity profile wile appear in the <em>Complexity Plot</em> panel.</p></li>
+</ol>
+<p>A number of peaks and flat areas are visible in the complexity profile. Peaks corresponds to the genome regions in which many changes were fixed during evolution.</p>
+<ol class="arabic simple" start="7">
+<li><p>To get the numerical values of the complexity profile, open left sliding panel, select the <em>File</em> tab at the top of the panel, click <code class="docutils literal notranslate"><span class="pre">Download</span> <span class="pre">complexity</span> <span class="pre">values</span></code> button.</p></li>
+</ol>
+<p>Screen recording with these steps is available <a class="reference external" href="https://youtu.be/q122j3pbcko">here</a>.</p>
 </div>
-<div class="section" id="gene-neigbourhood-analysis">
-<h3>Gene neigbourhood analysis<a class="headerlink" href="#gene-neigbourhood-analysis" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="gene-neigborhood-analysis">
+<h3>Gene neigborhood analysis<a class="headerlink" href="#gene-neigborhood-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Consider we are interested in a particular operon and we want to know more about its representation in a particular group of organisms. Let’s take <a class="reference external" href="https://en.wikipedia.org/wiki/Lac_operon">lactose operon</a> with its regulator in the Escherichia coli as an example (we will call it lac operon further).</p>
 <p>First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from <a class="reference external" href="https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&amp;sa=D&amp;ust=1585816672295000">EcoCyc</a> database or from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3">NCBI Refseq</a>. In our case, according to BioCyc, genome region of interst is located at 361249-366305 in <em>K-12 substr. MG1655</em>. First we select Escherichia coli as <code class="docutils literal notranslate"><span class="pre">Organism</span></code> in a dataset containing 300 <em>E. coli</em> genomes. Then we select K-12 MG1655 as <code class="docutils literal notranslate"><span class="pre">Reference</span></code>. Only one contig is present (finished genome, no plasmids), so we do not need to change <code class="docutils literal notranslate"><span class="pre">Contig</span></code> value.</p>
 <a class="reference internal image-reference" href="_images/use1_1.png"><img alt="_images/use1_1.png" src="_images/use1_1.png" style="width: 485.6px; height: 155.20000000000002px;" /></a>
@@ -97,7 +134,7 @@ One of the operon’s genes is absent in some set of genomes. By left clicking o
 <div class="section" id="publication-ready-graph-rendering">
 <h3>Publication-ready graph rendering<a class="headerlink" href="#publication-ready-graph-rendering" title="Permalink to this headline">¶</a></h3>
 <p>A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click “DOWNLOAD JPEG” or “DOWNLOAD JSON” buttons.
-JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in <a class="reference external" href="https://cytoscape.org/">Cytoscape</a> for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File-&gt;Import-&gt;Network from File and select file, that was downloaded from GCB. Adjust rendering options.</p>
+JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in <a class="reference external" href="https://cytoscape.org/">Cytoscape</a> for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File-&gt;Import-&gt;Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.</p>
 </div>
 </div>
 </div>
@@ -114,7 +151,7 @@ JPEG file stores only a bitmap image, while JSON file contains all infromation r
 <li><a class="reference internal" href="#gui-elements">GUI elements</a></li>
 <li><a class="reference internal" href="#step-by-step-tutorials">Step-by-step tutorials</a><ul>
 <li><a class="reference internal" href="#complexity-analysis">Complexity analysis</a></li>
-<li><a class="reference internal" href="#gene-neigbourhood-analysis">Gene neigbourhood analysis</a></li>
+<li><a class="reference internal" href="#gene-neigborhood-analysis">Gene neigborhood analysis</a></li>
 <li><a class="reference internal" href="#combined-analysis">Combined analysis</a></li>
 <li><a class="reference internal" href="#publication-ready-graph-rendering">Publication-ready graph rendering</a></li>
 </ul>

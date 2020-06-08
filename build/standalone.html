@@ -42,8 +42,8 @@
             
   <div class="section" id="standalone-version">
 <h1>Standalone version<a class="headerlink" href="#standalone-version" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="command-line-tools-basic-analysis">
-<h2>Command-line tools (basic analysis)<a class="headerlink" href="#command-line-tools-basic-analysis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="command-line-tool">
+<h2>Command-line tool<a class="headerlink" href="#command-line-tool" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="roadmap">
 <h3>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">¶</a></h3>
 <p>Standalone version should be used when the user wants to work with a custom set of genomes.
@@ -52,6 +52,26 @@ Command-line scripts are provided to: calculate complexity profile, generate sub
 </div>
 <div class="section" id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
+<p><strong>Conda</strong></p>
+<p>Please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/">installation guide</a>.</p>
+<p><strong>Snakemake</strong></p>
+<p>Installation instrctions are <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/getting_started/installation.html">here</a>.</p>
+<p><strong>Python 3.4 or later</strong></p>
+<p><strong>Graphviz and pygraphviz libraries</strong></p>
+<p>Can be installed by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span> <span class="n">python3</span><span class="o">-</span><span class="n">graphviz</span> <span class="n">python3</span><span class="o">-</span><span class="n">pygraphviz</span>
+</pre></div>
+</div>
+<p>or via conda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">anaconda</span> <span class="n">graphviz</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">anaconda</span> <span class="n">pygraphviz</span>
+</pre></div>
+</div>
+<p><strong>gene_graph_lib Python3 module</strong></p>
+<p>Can be installed by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">gene_graph_lib</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="orthogroup-inference">
 <h3>Orthogroup inference<a class="headerlink" href="#orthogroup-inference" title="Permalink to this headline">¶</a></h3>
@@ -127,78 +147,18 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <p>Main output files are:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="file docutils literal notranslate"><span class="pre">graph.db</span></code> - SQLite database conatining graph and complexity values,  paralogues genes are skipped.</p></li>
-<li><p><code class="file docutils literal notranslate"><span class="pre">graph_pars.db</span></code> - SQLite database conatining graph and complexity values, paralogues genes are orthologized.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">&lt;output&gt;.db</span></code> - SQLite database conatining graph and complexity values,  paralogues genes are skipped.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">&lt;output&gt;_pars.db</span></code> - SQLite database conatining graph and complexity values, paralogues genes are orthologized.</p></li>
 <li><p><code class="file docutils literal notranslate"><span class="pre">[reference</span> <span class="pre">genome]/prob_window_complexity_contig_[contig].txt</span></code> - text file containing complexity values for each contig in the reference genome.</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">&lt;output&gt;_context.sif</span></code> - number of unique contexts, computed for each node in graph</p></li>
+<li><p><code class="file docutils literal notranslate"><span class="pre">&lt;output&gt;_genes.sif</span></code> - list of all genes (nodes) from all genomes, with coordinates and Prokka annotations</p></li>
 </ul>
 </div></blockquote>
+<p>Where, <code class="docutils literal notranslate"><span class="pre">&lt;output&gt;</span></code> is what was specifiend in <code class="docutils literal notranslate"><span class="pre">-o</span></code> option, while running <cite>gg.py</cite>.</p>
 </div>
 </div>
-<div class="section" id="command-line-tools-advanced">
-<h2>Command-line tools (advanced)<a class="headerlink" href="#command-line-tools-advanced" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Roadmap<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>For additional analysis, commands can be used that: 1) generate a complete graph, 2) generate and visualize subgraphs, 3) calculate the complexity.
-Subgraph generation allows not to use the local server for exploring small regions of the genome in the form of a graph.
-Separate full subgraph generation</p>
-<img alt="_images/standalone_scheme_hor_short.png" class="align-center" src="_images/standalone_scheme_hor_short.png" />
-</div>
-<div class="section" id="building-a-graph">
-<h3>Building a graph<a class="headerlink" href="#building-a-graph" title="Permalink to this headline">¶</a></h3>
-<p><em>INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format</em></p>
-<p><em>OUTPUT: graph-based representation of genomes (sif-file and sqlite database)</em></p>
-<p>Graph structure is stored in a sif-formatted text file and in a sqlite database file. Sif-formated text file is needed for furher command-line analysis steps. Sqlite database is needed for subsequent export to the local gcb server.</p>
-<p>To build a graph, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">parse_og</span><span class="o">.</span><span class="n">py</span>  <span class="o">-</span><span class="n">i</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">txt</span> <span class="n">file</span> <span class="k">with</span> <span class="n">orthogroups</span><span class="p">]</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">path</span> <span class="ow">and</span> <span class="n">name</span> <span class="n">prefix</span> <span class="k">for</span> <span class="n">output</span> <span class="n">files</span><span class="p">]</span>
-</pre></div>
-</div>
-<p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">parse_og</span><span class="o">.</span><span class="n">py</span>  <span class="o">-</span><span class="n">i</span> <span class="n">Results</span><span class="o">/</span><span class="n">Orthogroups</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">o</span> <span class="n">graph</span>
-</pre></div>
-</div>
-<p>Main output files are:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="file docutils literal notranslate"><span class="pre">graph.sif</span></code> - graph in a sif format.</p></li>
-<li><p><code class="file docutils literal notranslate"><span class="pre">graph.db</span></code> - SQLite database conatining graph.</p></li>
-</ul>
-</div></blockquote>
-<p>Additional files for optional user analysis:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="file docutils literal notranslate"><span class="pre">graph_context.sif</span></code> - number of unique contexts for each gene.</p></li>
-<li><p><code class="file docutils literal notranslate"><span class="pre">graph_genes.sif</span></code> - genes (nodes) from all genomes, with coordinates and Prokka annotations.</p></li>
-</ul>
-</div></blockquote>
-<p>In a text <code class="docutils literal notranslate"><span class="pre">graph.sif</span></code> file, each line describes one edge, with its source and target nodes, genome id and contig id, to which this edge belongs. SQLite database <code class="docutils literal notranslate"><span class="pre">graph.db</span></code> file contains same information, and can be supplemented with complexity values in the course of further analysis.</p>
-</div>
-<div class="section" id="complexity-estimation">
-<h3>Complexity estimation<a class="headerlink" href="#complexity-estimation" title="Permalink to this headline">¶</a></h3>
-<p>The next step is the computing of genome complexity. To do this type in terminal:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">start_computing</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="n">graph</span><span class="o">.</span><span class="n">sif</span> <span class="o">-</span><span class="n">o</span> <span class="p">[</span><span class="n">path</span> <span class="n">to</span> <span class="n">output</span> <span class="n">folder</span><span class="p">]</span> <span class="o">--</span><span class="n">reference</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">reference</span> <span class="n">genome</span><span class="p">]</span>
-</pre></div>
-</div>
-<dl>
-<dt>Additional parameters:</dt><dd><p>--window - sliding window size (default 20)</p>
-<p>--iterations - number of iterations in probabilistic method (default 500)</p>
-<p>--genomes_list - path to file with a list of names which will be used to create a graph (default all strains from <a href="#id2"><span class="problematic" id="id3">*</span></a>.sif will be used)</p>
-<p>--min_depth, --max_depth - minimum and maximum depth of generated paths in the graph (default from 0 to inf)</p>
-<p>--save_db - path to the database, created by orthfinder_parse.py (default data will not be saved to db, only to txt). It’s necessary to use this parameter if you want to use this complexity profile in the stand-alone browser-based GCB application.</p>
-</dd>
-</dl>
-<p>Output files for each contig in the reference genome:</p>
-<blockquote>
-<div><p><code class="file docutils literal notranslate"><span class="pre">all_bridges_contig_n.txt</span></code> - this file contains information about the number of deviating paths between each pair of nodes in the reference genome</p>
-</div></blockquote>
-</div>
-<div class="section" id="podval">
-<h3>PODVAL<a class="headerlink" href="#podval" title="Permalink to this headline">¶</a></h3>
-<p>Then gene annotation with prokka  tool of each genome is performed. Genbank files then converted to fasta formatted amino acid protein sequences with a custom python3 script. This script inserts special information about genes in fasta headers, namely: genome file name, numeric id, product name, contig, start, end (for example, <code class="docutils literal notranslate"><span class="pre">&gt;GCF_000007445|4|Threonine_synthase|NC_004431.1|4445|5731</span></code>). Then these files are used to infer orthology groups with OrthoFinder tool. The resulting file with orthology groups (OG) contains information about each OG in the following format: <code class="docutils literal notranslate"><span class="pre">&lt;og</span> <span class="pre">id&gt;:</span> <span class="pre">&lt;gene1&gt;</span> <span class="pre">&lt;gene2&gt;</span> <span class="pre">…</span></code></p>
-<p>For example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OG0008594</span><span class="p">:</span> <span class="n">GCF_001618325</span><span class="o">|</span><span class="mi">2406</span><span class="o">|</span><span class="n">Small_toxic_polypeptide_LdrD</span><span class="o">|</span><span class="n">NZ_CP015069</span><span class="o">.</span><span class="mi">1</span><span class="o">|</span><span class="mi">2607133</span><span class="o">|</span><span class="mi">2607240</span> <span class="n">GCF_001663475</span><span class="o">|</span><span class="mi">366</span><span class="o">|</span><span class="n">Small_toxic_polypeptide_LdrD</span><span class="o">|</span><span class="n">NZ_CP015159</span><span class="o">.</span><span class="mi">1</span><span class="o">|</span><span class="mi">380042</span><span class="o">|</span><span class="mi">380149</span>
-</pre></div>
-</div>
-</div>
+<div class="section" id="local-gcb-server">
+<h2>Local GCB server<a class="headerlink" href="#local-gcb-server" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -211,20 +171,14 @@ Separate full subgraph generation</p>
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Standalone version</a><ul>
-<li><a class="reference internal" href="#command-line-tools-basic-analysis">Command-line tools (basic analysis)</a><ul>
+<li><a class="reference internal" href="#command-line-tool">Command-line tool</a><ul>
 <li><a class="reference internal" href="#roadmap">Roadmap</a></li>
 <li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li><a class="reference internal" href="#orthogroup-inference">Orthogroup inference</a></li>
 <li><a class="reference internal" href="#building-a-graph-and-complexity-estimation-with-a-single-command">Building a graph and complexity estimation with a single command</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#command-line-tools-advanced">Command-line tools (advanced)</a><ul>
-<li><a class="reference internal" href="#id1">Roadmap</a></li>
-<li><a class="reference internal" href="#building-a-graph">Building a graph</a></li>
-<li><a class="reference internal" href="#complexity-estimation">Complexity estimation</a></li>
-<li><a class="reference internal" href="#podval">PODVAL</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#local-gcb-server">Local GCB server</a></li>
 </ul>
 </li>
 </ul>

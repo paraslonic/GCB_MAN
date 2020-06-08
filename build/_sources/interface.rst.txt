@@ -31,13 +31,50 @@ User can upload colors for the nodes from the current subgraph. Each line of thi
 	OG000004 #ff0000
 	OG000005 #777777
 
+
 Step-by-step tutorials
 #######################
 
 Complexity analysis
 --------------------
 
-Gene neigbourhood analysis
+Complexity is the measure of local genome variability. It is calculated for a set of genomes, one of which is selected as a reference. The greater the number of local changes in a certain neighborhood, the greater the value of complexity. Locality is set by the parameter ``Window``, the larger it is, the more large-scale changes influences complexity value.
+
+Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version.
+
+To obtain the complexity profile for a certain set of genomes (we will consider the set of *Bacillus Subtilus* available at gcb.rcpcm.org, follow these steps:
+
+(1) Open gcb.rcpcm.org in you web-browser.
+
+ Left panel with a number of settings will open automatically. 
+
+(2) Click on the ``Organism`` selector and choose ``Bacillus_subtilis`` item.
+
+(3) Click on the ``Reference`` selector and choose one of the available genomes. Let's choose for example ``GCF_001889385.1_ASM188938v1_genomic (J-5)`` genome.
+
+ Genome name is constructed based on its filename (NCBI RefSeq filenames are used in the web version, genomes were downloaded from NCBI FTP server). In the web version strain name from the RefSeq is added to this name in brackets. 
+
+(4) Click on the ``Reference`` selector.
+
+ The contigs of the selected genome will be shown. For complete (finished) genomes they corresponds to replicones (chromosome(s) and plasmids), for draft genomes they are some fragments of genome. You cannot see the complexity profile for all contigs at the same time, they must be selected in turn.
+
+ In case of ``J-5`` genome, only one contig is present (``NZ_CP018295.1``), which means that it is a complete (finished) genome, with single chromosome and without plasmids. 
+
+(5) Close left sliding panel by clicking on the some point outside it (e.g., on the middle of the page).
+
+ To open this panel once again, click on the icon with three horizontal lines on the left side of the page.
+
+(6) Complexity profile wile appear in the *Complexity Plot* panel.
+
+A number of peaks and flat areas are visible in the complexity profile. Peaks corresponds to the genome regions in which many changes were fixed during evolution.  
+
+(7) To get the numerical values of the complexity profile, open left sliding panel, select the *File* tab at the top of the panel, click ``Download complexity values`` button. 
+
+Screen recording with these steps is available `here <https://youtu.be/q122j3pbcko>`_.
+
+
+
+Gene neigborhood analysis
 ---------------------------
 
 Consider we are interested in a particular operon and we want to know more about its representation in a particular group of organisms. Let's take `lactose operon <https://en.wikipedia.org/wiki/Lac_operon>`_ with its regulator in the Escherichia coli as an example (we will call it lac operon further).
@@ -99,6 +136,6 @@ Publication-ready graph rendering
 ---------------------------------
 
 A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click "DOWNLOAD JPEG" or "DOWNLOAD JSON" buttons.
-JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Adjust rendering options.
+JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
 
 

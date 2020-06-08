@@ -65,7 +65,7 @@
 </ul>
 </dd>
 </dl>
-<p>The GCB is available as a <a class="reference external" href="https://gcb.rcpcm.org">web server</a> and as a <a class="reference external" href="https://github.com/DNKonanov/geneGraph">standalone application</a>.
+<p>The GCB is available as a <a class="reference external" href="https://gcb.rcpcm.org">web server</a> and as a standalone application.
 Web server contains precalculated data for 143 prokaryote species. Standalone version allows to analyze a custom set of genomes (basic command-line skills will be needed).</p>
 <p>Preprint is <a class="reference external" href="https://www.biorxiv.org/content/10.1101/713123v1">available</a> . Please cite it when reporting results obtained with the GCB.</p>
 <div class="toctree-wrapper compound">
@@ -81,7 +81,7 @@ Web server contains precalculated data for 143 prokaryote species. Standalone ve
 <li class="toctree-l2"><a class="reference internal" href="interface.html#gui-elements">GUI elements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="interface.html#step-by-step-tutorials">Step-by-step tutorials</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="interface.html#complexity-analysis">Complexity analysis</a></li>
-<li class="toctree-l3"><a class="reference internal" href="interface.html#gene-neigbourhood-analysis">Gene neigbourhood analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="interface.html#gene-neigborhood-analysis">Gene neigborhood analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="interface.html#combined-analysis">Combined analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="interface.html#publication-ready-graph-rendering">Publication-ready graph rendering</a></li>
 </ul>
@@ -89,20 +89,14 @@ Web server contains precalculated data for 143 prokaryote species. Standalone ve
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="standalone.html">Standalone version</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="standalone.html#command-line-tools-basic-analysis">Command-line tools (basic analysis)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="standalone.html#command-line-tool">Command-line tool</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="standalone.html#roadmap">Roadmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="standalone.html#prerequisites">Prerequisites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="standalone.html#orthogroup-inference">Orthogroup inference</a></li>
 <li class="toctree-l3"><a class="reference internal" href="standalone.html#building-a-graph-and-complexity-estimation-with-a-single-command">Building a graph and complexity estimation with a single command</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="standalone.html#command-line-tools-advanced">Command-line tools (advanced)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="standalone.html#id1">Roadmap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="standalone.html#building-a-graph">Building a graph</a></li>
-<li class="toctree-l3"><a class="reference internal" href="standalone.html#complexity-estimation">Complexity estimation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="standalone.html#podval">PODVAL</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="standalone.html#local-gcb-server">Local GCB server</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions</a><ul>
@@ -114,6 +108,7 @@ Web server contains precalculated data for 143 prokaryote species. Standalone ve
 <li class="toctree-l2"><a class="reference internal" href="FAQ.html#where-should-i-take-coordinates-of-genes-of-interest">Where should I take coordinates of genes of interest?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAQ.html#how-can-i-obtain-graph-image-in-vector-format-for-publication">How can I obtain graph image in vector format for publication?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAQ.html#what-if-genome-of-interest-is-absent-at-gcb-rcpcm-org">What if genome of interest is absent at gcb.rcpcm.org?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FAQ.html#can-i-run-standalone-version-on-windows">Can I run standalone version on Windows?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAQ.html#what-gene-sets-can-be-used-in-standalone-version">What gene sets can be used in standalone version?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAQ.html#can-i-use-pc-for-the-standalone-analyisis-or-do-i-need-a-computational-cluster">Can I use PC for the standalone analyisis or do I need a computational cluster?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="FAQ.html#how-many-genomes-may-be-analyzed-in-a-standalone-version">How many genomes may be analyzed in a standalone version?</a></li>
@@ -123,11 +118,7 @@ Web server contains precalculated data for 143 prokaryote species. Standalone ve
 <li class="toctree-l1"><a class="reference internal" href="contacts.html">Contacts</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
 </div>
@@ -138,12 +129,6 @@ Web server contains precalculated data for 143 prokaryote species. Standalone ve
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Genome Complexity Browser</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-
   <h4>Next topic</h4>
   <p class="topless"><a href="general.html"
                         title="next chapter">Main concepts</a></p>
