@@ -92,7 +92,7 @@
 <div class="section" id="gene-neigborhood-analysis">
 <h3>Gene neigborhood analysis<a class="headerlink" href="#gene-neigborhood-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Consider we are interested in a particular operon and we want to know more about its representation in a particular group of organisms. Let’s take <a class="reference external" href="https://en.wikipedia.org/wiki/Lac_operon">lactose operon</a> with its regulator in the Escherichia coli as an example (we will call it lac operon further).</p>
-<p>First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from <a class="reference external" href="https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&amp;sa=D&amp;ust=1585816672295000">EcoCyc</a> database or from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3">NCBI Refseq</a>. In our case, according to BioCyc, genome region of interst is located at 361249-366305 in <em>K-12 substr. MG1655</em>. First we select Escherichia coli as <code class="docutils literal notranslate"><span class="pre">Organism</span></code> in a dataset containing 300 <em>E. coli</em> genomes. Then we select K-12 MG1655 as <code class="docutils literal notranslate"><span class="pre">Reference</span></code>. Only one contig is present (finished genome, no plasmids), so we do not need to change <code class="docutils literal notranslate"><span class="pre">Contig</span></code> value.</p>
+<p>First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from <a class="reference external" href="https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&amp;sa=D&amp;ust=1585816672295000">EcoCyc</a> database or from <a class="reference external" href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3">NCBI Refseq</a>. According to EcoCyc, the operon is located at 361249-366305 in <em>K-12 substr. MG1655</em>. Let’s first select <em>Escherichia coli</em> as <code class="docutils literal notranslate"><span class="pre">Organism</span></code>, in a dataset containing 300 <em>E. coli</em> genomes. Then, select K-12 MG1655 as <code class="docutils literal notranslate"><span class="pre">Reference</span></code>. Only one contig is present (finished genome, no plasmids), so we do not need to change <code class="docutils literal notranslate"><span class="pre">Contig</span></code> value.</p>
 <a class="reference internal image-reference" href="_images/use1_1.png"><img alt="_images/use1_1.png" src="_images/use1_1.png" style="width: 485.6px; height: 155.20000000000002px;" /></a>
 <p>Then we should put the operon’s margin coordinates to text fields: <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">coordinate</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">coordinate</span></code>.</p>
 <a class="reference internal image-reference" href="_images/use1_2.png"><img alt="_images/use1_2.png" src="_images/use1_2.png" style="width: 685.6px; height: 70.4px;" /></a>
@@ -106,16 +106,16 @@
 <p>By looking at thick edges designated with 1 and 2, we can tell that operon is located in a conserved context, in most of the genomes.</p>
 <p>One of the operon’s genes is absent in some set of genomes. By left clicking on that gene, we can select it, and know its gene product (gene products are assigned with <a class="reference external" href="https://github.com/tseemann/prokka">Prokka</a>).</p>
 <img alt="_images/select_node.gif" src="_images/select_node.gif" />
-<p>Missing gene is Galactoside acetyltransferase. This gene is not in operons of a number of genomes. what are that genomes?</p>
-<p>By clicking on the bypassing edge we select this edge.
-Selection of the edge results in two effects:</p>
+<p>Missing gene is Galactoside acetyltransferase. This gene is not in operons of a number of genomes. what are that genomes? Let’s click on bypassing edge.</p>
+<img alt="_images/select_edge.gif" src="_images/select_edge.gif" />
+<p>Click on the edge, selects it.</p>
+<p>Selection of the edge results in two effects:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>names of genomes corresponding to this edge appears in the <code class="docutils literal notranslate"><span class="pre">List</span> <span class="pre">of</span> <span class="pre">genomes</span></code> section below the graph</p></li>
 <li><p>other edges, that contain at least one of the genomes from the selected edge, are colored blue. In this way, one can determine possible variants of gene neigbhorhoods, and in which genomes they are present.</p></li>
 </ol>
 </div></blockquote>
-<img alt="_images/select_edge.gif" src="_images/select_edge.gif" />
 <p>For now we have determined, that a number of genomes does not contain Galactoside acetyltransferase. We can also notice nodes connected by a thin edges, which seems to represent other alternative variants of the operon. Let’s click on that nodes and on the nodes from the reference, to see their products.</p>
 <img alt="_images/look_orphans1.gif" src="_images/look_orphans1.gif" />
 <p>We see that their names are the same, but their length differs a lot: 263 b.p. for an outlier gene and 1253 b.p. for a reference gene. Often, and also in this particular case,  it comes from frameshit splitting some genes into parts, some of which may become part of homology groups representing original gene.</p>
@@ -134,8 +134,10 @@ Selection of the edge results in two effects:</p>
 </div>
 <div class="section" id="publication-ready-graph-rendering">
 <h3>Publication-ready graph rendering<a class="headerlink" href="#publication-ready-graph-rendering" title="Permalink to this headline">¶</a></h3>
-<p>A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click “DOWNLOAD JPEG” or “DOWNLOAD JSON” buttons.
-JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in <a class="reference external" href="https://cytoscape.org/">Cytoscape</a> for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File-&gt;Import-&gt;Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.</p>
+<p>A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select <em>File</em> tab, select <em>Graph</em> subtab, click <code class="docutils literal notranslate"><span class="pre">DOWNLOAD</span> <span class="pre">JPEG</span></code> or <code class="docutils literal notranslate"><span class="pre">DOWNLOAD</span> <span class="pre">JSON</span></code> buttons.</p>
+<p>JPEG file stores only a bitmap image, JSON file contains all infromation regarding the current graph, including its layout.</p>
+<p>JSON file can be imported in <a class="reference external" href="https://cytoscape.org/">Cytoscape</a> for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg).</p>
+<p>To import JSON graph file into Cytoscape, select File-&gt;Import-&gt;Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.</p>
 </div>
 </div>
 </div>

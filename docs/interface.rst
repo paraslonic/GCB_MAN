@@ -19,9 +19,11 @@ Complexity analysis
 
 Complexity is the measure of local genome variability. It is calculated for a set of genomes, one of which is selected as a reference. The greater the number of local changes in a certain neighborhood, the greater the value of complexity. Locality is set by the parameter ``Window``, the larger it is, the more large-scale changes influences complexity value.
 
-Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version.
+Thus, the three parameters that you need to select to calculate the complexity profile are: 1) set of genomes, 2) reference genome, 3) window size. All of them can be set in the left sliding panel. 
 
-To obtain the complexity profile for a certain set of genomes (we will consider the set of *Bacillus Subtilus* available at gcb.rcpcm.org, follow these steps:
+At gcb.rcpcm.org we precalculated complexity profiles for over 140 prokaryotic species. Any set of genomes may be used in a stand-alone version. Window size equals 20 by default, and can be changed to other precalculated values (20, 50 and 100 values are available at gcb.rcpcm.org, any value may be used in a standalone version). 
+
+To obtain the complexity profile for a certain set of genomes (we will consider the set of *Bacillus Subtilus* available at gcb.rcpcm.org), follow these steps:
 
 (1) Open gcb.rcpcm.org in you web-browser.
 
@@ -49,8 +51,7 @@ A number of peaks and flat areas are visible in the complexity profile. Peaks co
 
 (7) To get the numerical values of the complexity profile, open left sliding panel, select the *File* tab at the top of the panel, click ``Download complexity values`` button. 
 
-Screen recording with these steps is available `here <https://youtu.be/q122j3pbcko>`_.
-
+Screen recording with these steps performed is available `here <https://youtu.be/q122j3pbcko>`_.
 
 
 Gene neigborhood analysis
@@ -58,7 +59,7 @@ Gene neigborhood analysis
 
 Consider we are interested in a particular operon and we want to know more about its representation in a particular group of organisms. Let's take `lactose operon <https://en.wikipedia.org/wiki/Lac_operon>`_ with its regulator in the Escherichia coli as an example (we will call it lac operon further).
 
-First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from `EcoCyc <https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&sa=D&ust=1585816672295000>`_ database or from `NCBI Refseq <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3>`_. In our case, according to BioCyc, genome region of interst is located at 361249-366305 in *K-12 substr. MG1655*. First we select Escherichia coli as ``Organism`` in a dataset containing 300 *E. coli* genomes. Then we select K-12 MG1655 as ``Reference``. Only one contig is present (finished genome, no plasmids), so we do not need to change ``Contig`` value.
+First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from `EcoCyc <https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&sa=D&ust=1585816672295000>`_ database or from `NCBI Refseq <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3>`_. According to EcoCyc, the operon is located at 361249-366305 in *K-12 substr. MG1655*. Let's first select *Escherichia coli* as ``Organism``, in a dataset containing 300 *E. coli* genomes. Then, select K-12 MG1655 as ``Reference``. Only one contig is present (finished genome, no plasmids), so we do not need to change ``Contig`` value.
 
 .. image:: img/tutorial/use1/use1_1.png
         :scale: 80 %
@@ -136,7 +137,12 @@ To select some genes, for example, located at the variable region, press the lef
 Publication-ready graph rendering
 ---------------------------------
 
-A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click "DOWNLOAD JPEG" or "DOWNLOAD JSON" buttons.
-JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
+A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select *File* tab, select *Graph* subtab, click ``DOWNLOAD JPEG`` or ``DOWNLOAD JSON`` buttons.
+
+JPEG file stores only a bitmap image, JSON file contains all infromation regarding the current graph, including its layout. 
+
+JSON file can be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). 
+
+To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
 
 

@@ -58,7 +58,7 @@ Gene neigborhood analysis
 
 Consider we are interested in a particular operon and we want to know more about its representation in a particular group of organisms. Let's take `lactose operon <https://en.wikipedia.org/wiki/Lac_operon>`_ with its regulator in the Escherichia coli as an example (we will call it lac operon further).
 
-First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from `EcoCyc <https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&sa=D&ust=1585816672295000>`_ database or from `NCBI Refseq <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3>`_. In our case, according to BioCyc, genome region of interst is located at 361249-366305 in *K-12 substr. MG1655*. First we select Escherichia coli as ``Organism`` in a dataset containing 300 *E. coli* genomes. Then we select K-12 MG1655 as ``Reference``. Only one contig is present (finished genome, no plasmids), so we do not need to change ``Contig`` value.
+First, we need to determine genome position of genes of interest. We can do it in multiple ways, e.g., from `EcoCyc <https://www.google.com/url?q=https://biocyc.org/ECOLI/NEW-IMAGE?type%3DOPERON%26object%3DTU00036&sa=D&ust=1585816672295000>`_ database or from `NCBI Refseq <https://www.ncbi.nlm.nih.gov/nuccore/NC_000913.3>`_. According to EcoCyc, the operon is located at 361249-366305 in *K-12 substr. MG1655*. Let's first select *Escherichia coli* as ``Organism``, in a dataset containing 300 *E. coli* genomes. Then, select K-12 MG1655 as ``Reference``. Only one contig is present (finished genome, no plasmids), so we do not need to change ``Contig`` value.
 
 .. image:: img/tutorial/use1/use1_1.png
         :scale: 80 %
@@ -88,16 +88,19 @@ One of the operon’s genes is absent in some set of genomes. By left clicking o
 
 .. image:: img/tutorial/use1/select_node.gif
 
-Missing gene is Galactoside acetyltransferase. This gene is not in operons of a number of genomes. what are that genomes? 
+Missing gene is Galactoside acetyltransferase. This gene is not in operons of a number of genomes. what are that genomes? Let's click on bypassing edge.
 
-By clicking on the bypassing edge we select this edge. 
+.. image:: img/tutorial/use1/select_edge.gif
+
+
+Click on the edge, selects it.
+
 Selection of the edge results in two effects:
          
          1) names of genomes corresponding to this edge appears in the ``List of genomes`` section below the graph 
          
          2) other edges, that contain at least one of the genomes from the selected edge, are colored blue. In this way, one can determine possible variants of gene neigbhorhoods, and in which genomes they are present. 
 
-.. image:: img/tutorial/use1/select_edge.gif
 
 For now we have determined, that a number of genomes does not contain Galactoside acetyltransferase. We can also notice nodes connected by a thin edges, which seems to represent other alternative variants of the operon. Let's click on that nodes and on the nodes from the reference, to see their products.  
 
@@ -133,7 +136,12 @@ To select some genes, for example, located at the variable region, press the lef
 Publication-ready graph rendering
 ---------------------------------
 
-A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select FILE tab, select GRAPH subtab, click "DOWNLOAD JPEG" or "DOWNLOAD JSON" buttons.
-JPEG file stores only a bitmap image, while JSON file contains all infromation regarding the current graph, including its layout. JSON filecan be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
+A graph-based representation of genome region can be exported in the form of JPEG image or a JSON file. To do this, fist draw some graph and then go to the left sliding panel, select *File* tab, select *Graph* subtab, click ``DOWNLOAD JPEG`` or ``DOWNLOAD JSON`` buttons.
+
+JPEG file stores only a bitmap image, JSON file contains all infromation regarding the current graph, including its layout. 
+
+JSON file can be imported in `Cytoscape <https://cytoscape.org/>`_ for complete visualization control (customize the look of nodes, edges, do manual or one of the automatic layouts). Cytoscape graph renderings can be exported in a number of bitmap and vector formats (e.g., pdf, svg). 
+
+To import JSON graph file into Cytoscape, select File->Import->Network from File and select file, that was downloaded from GCB. Now you may arange graph nodes and adjust style.
 
 
