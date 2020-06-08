@@ -63,7 +63,7 @@ A number of peaks and flat areas are visible in the complexity profile. Peaks co
 
 (7) To get the numerical values of the complexity profile, open left sliding panel, select the *File* tab at the top of the panel, click ``Download complexity values`` button. 
 
-Screen recording with these steps performed is available `here <https://youtu.be/q122j3pbcko>`_.
+**Screen recording** with these steps performed is available `here <https://youtu.be/q122j3pbcko>`_. 
 
 
 Gene neigborhood analysis
@@ -144,6 +144,7 @@ Before proceding to the graph visualization, we recommend adjusting graph render
 
 To select some genes, for example, located at the variable region, press the left mouse button and while holding it move the cursor to surround the desired genes. Their products will apear in the bottom right part of the **Graph** panel.
 
+**Screen recording** with these steps, and medium hot spot, is available `here <https://youtu.be/q122j3pbcko>`_.
 
 
 Publication-ready graph rendering

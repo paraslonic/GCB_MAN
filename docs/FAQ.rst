@@ -25,13 +25,13 @@ How node name is selected?
 Does all variants that present in considered set of genomes are represented in the graph visualization form? 
 -------------------------------------------------------------------------------------------------------------------
 
-- Not always. GCB by default skips paralogues genes, but they can still be analysed by switching ``Draw paralogues`` toggle on left slide bar.  
+- Not always. GCB by default skips paralogues genes, but they can still be analysed by switching ``Draw paralogues`` toggle in the left slide bar.  
 
 Where should I take coordinates of genes of interest?
 -------------------------------------------------------------------------------------------------------------------
 
 - from genome annotations (i.e. Genebank or RefSeq database) by searching for particular gene.
-- DOOR database [Mao, Xizeng, et al., Nucleic acids research, 2014] (currently available `here <http://161.117.81.224/DOOR3/>`_ ) can be used to find information about operons of specific organism.
+- from DOOR database of operons [Mao, Xizeng, et al., Nucleic acids research, 2014] (currently available `here <http://161.117.81.224/DOOR3/>`_ ).
 - from papers, in which genome coordinates are specified.
 
 How can I obtain graph image in vector format for publication?
