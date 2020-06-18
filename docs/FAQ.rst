@@ -47,7 +47,7 @@ What if genome of interest is absent at gcb.rcpcm.org?
 Can I run standalone version on Windows?
 ----------------------------------------
 
-- Most likely yes, but it will not be easy if you do not have a Python and conda already installed. We only tested standalone version of GCB on different Linux distributives (Ubuntu, CentOS).
+- Most likely yes, via <Windows Subsystem for Linux https://docs.microsoft.com/en-us/windows/wsl/install-win10>_, but we only tested standalone version of the GCB on Linux (Ubuntu, CentOS).
 
 What gene sets can be used in standalone version?
 --------------------------------------------------
