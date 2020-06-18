@@ -194,65 +194,91 @@ Open **127.0.0.1:8000** or **localhost:8000** in your web-browser and use GCB.
 Restart the sever after adding new datasets.
 
 
-Complete example
-#################
+Complete step-by-step example
+##############################
 
-Comment: we will work in the home directory, consider using other folders according to your preference.
+Here we will install all prerequisites and software needed for the analysis, and will add a new dataset to a local GCB server. 
+
+Following folders will be created:
+
+	``orthosnake`` - Snakemake pipeline to infere orthogroups. We will download genomes from the RefSeq here.
+
+	``geneGraph`` - console applications needed to build the graph-based represenatation of genomes.
+
+	``mpneumoniae`` - a project folder, here the graph representation will be build for 5 *Mycoplasma pneumoniae* genomes. 
+
+	``GCB`` - local server application, this folder contains all datasets. 
+
+Note: we will work in the home directory, consider using other folders according to your preference.
 
 **Install conda**
 
-If you have not installed conda (miniconda or anaconda) previously, you should first install it. For example, by downloading `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ and running the installation bash script.
+Install conda if you have not done it previously, for example by following `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ installation guide.
 
-**Create conda environment for GCB**::
+**Create conda environment**
+
+To create conda environment for GCB and install *snakemake* into this environment, run::
 
 	conda install -c conda-forge mamba
 	mamba create -c conda-forge -c bioconda -n gcb snakemake
 	conda activate gcb
 
-**Download orthosnake**::
+**Download orthosnake**
+
+Orthosnake will be needed to infere orthogroups.
 
 	cd ~
 	git clone https://github.com/paraslonic/orthosnake.git
 	cd orthosnake
 
-**Download genomes**::
+**Download genomes**
+
+Get file with RefSeq genomes information::
 
 	wget ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/assembly_summary_refseq.txt
 
-We will download 5 complete genomes::
+Download 5 complete genomes of *M. pneumoniae* from the RefSeq database::
 
 	grep "Mycoplasma pneumoniae" assembly_summary_refseq.txt | grep "Complete" | awk -F "\t" '{print $20}' | awk 'BEGIN{FS=OFS="/";filesuffix="genomic.fna.gz"}{ftpdir=$0;asm=$10;file=asm"_"filesuffix;print ftpdir,file}' > complete_genomes.url
 	head -5 complete_genomes.url > selected_genomes.url
 	wget $(cat selected_genomes.url)
+
+Move this genomes to ``fna`` folder (inside *orthofinder* folder)::
+
 	gunzip *.gz
 	mv *.fna fna
 
 **Run orthofinder**
 
-To run orthofinder in 4 threads::
+Note: Installation of prokka and orthofinder will be performed during the first run.
+
+Run orthofinder in 4 threads (will take around 20-30 minuttes)::
 
 	snakemake -j 4 --use-conda
 
-Installation of prokka and orthofinder (performed during the first run only) and the analysis took 21m on a PC with i7 CPU.
-
 We have inferred orthogroups, they are located in ``Results/Orthogroups.txt`` file.
 
-**Download geneGraph console tools**::
+**Download geneGraph console tools**
+
+geneGraph is needed to build a grpah-based representation of genomes::
 
 	cd ~
-	pip3 install gene_graph_lib
 	git clone https://github.com/DNKonanov/geneGraph.git
+	pip3 install gene_graph_lib
 
-**Build a graph representation of genomes**::
+**Build a graph-based representation of genomes**::
 
-	mkdir -p mpneumoniae/
-	cd mpneumoniae/
+	cd ~
+	mkdir mpneumoniae
+	cd mpneumoniae
 	cp ~/orthosnake/Results/Orthogroups.txt .
 	python ~/geneGraph/gg.py -i Orthogroups.txt -o mycoplasma_pneumoniae
 
-Analysis should take about a minute.
+Analysis will take about a minute.
 
-**Install GCB local web server**::
+**Install GCB local web server**
+
+GCB application is needed to visualize genomes in a graph-based form. All datasets are located in its ``data`` subfolder::
 
 	cd ~
 	git clone https://github.com/DNKonanov/GCB.git
@@ -260,7 +286,8 @@ Analysis should take about a minute.
 	sudo apt-get install graphviz graphviz-dev python3-graphviz python3-pygraphviz
 	pip3 install -r requirements.txt
 
-**Copy data**::
+**Copy results of geneGraph run into ``data`` folder**::
+
 	mkdir data
 	cp -r ~/mpneumoniae/mycoplasma_pneumoniae/ data
 	
@@ -268,4 +295,4 @@ Analysis should take about a minute.
 
 	python3 gcb_server.py
 
-Open http://127.0.0.1:8000/ in a web browser and work with GCB.
+Open http://127.0.0.1:8000/ in a web browser, select *mycoplasma_pneumoniae* in ``Organism`` selecter in left panel, work with GCB.
