@@ -45,7 +45,7 @@ exclude_patterns = []
 #html_theme = 'classic'
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
-html_logo = 'img/small_logo1.png'
+html_logo = 'img/logo4.png'
 html_theme_options = {
     'logo_only': True,
     'display_version': False,
