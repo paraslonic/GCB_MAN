@@ -53,7 +53,7 @@ Command-line scripts are provided to: calculate complexity profile, generate sub
 <div class="section" id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
 <p><strong>Conda</strong></p>
-<p>Please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/">installation guide</a>.</p>
+<p>Please refer to the <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/">installation guide</a>. Select Python3 version.</p>
 <p><strong>Snakemake</strong></p>
 <p>Installation instrctions are <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/getting_started/installation.html">here</a>.</p>
 <p><strong>Python 3.4 or later</strong></p>
@@ -205,8 +205,77 @@ We recomend using our <a class="reference external" href="https://github.com/par
 </pre></div>
 </div>
 <p>Open <strong>127.0.0.1:8000</strong> or <strong>localhost:8000</strong> in your web-browser and use GCB.</p>
-<p>Restarting of the sever is needed every time you add a new dataset.</p>
+<p>Restart the sever after adding new datasets.</p>
 </div>
+</div>
+<div class="section" id="complete-example">
+<h2>Complete example<a class="headerlink" href="#complete-example" title="Permalink to this headline">¶</a></h2>
+<p>Comment: we will work in the home directory, consider using other folders according to your preference.</p>
+<p><strong>Install conda</strong></p>
+<p>If you have not installed conda (miniconda or anaconda) previously, you should first install it. For example, by downloading <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> and running the installation bash script.</p>
+<p><strong>Create conda environment for GCB</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">mamba</span>
+<span class="n">mamba</span> <span class="n">create</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="o">-</span><span class="n">c</span> <span class="n">bioconda</span> <span class="o">-</span><span class="n">n</span> <span class="n">gcb</span> <span class="n">snakemake</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">gcb</span>
+</pre></div>
+</div>
+<p><strong>Download orthosnake</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">paraslonic</span><span class="o">/</span><span class="n">orthosnake</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">orthosnake</span>
+</pre></div>
+</div>
+<p><strong>Download genomes</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="n">ftp</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">ncbi</span><span class="o">.</span><span class="n">nlm</span><span class="o">.</span><span class="n">nih</span><span class="o">.</span><span class="n">gov</span><span class="o">/</span><span class="n">genomes</span><span class="o">/</span><span class="n">refseq</span><span class="o">/</span><span class="n">assembly_summary_refseq</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>We will download 5 complete genomes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>grep &quot;Mycoplasma pneumoniae&quot; assembly_summary_refseq.txt | grep &quot;Complete&quot; | awk -F &quot;\t&quot; &#39;{print $20}&#39; | awk &#39;BEGIN{FS=OFS=&quot;/&quot;;filesuffix=&quot;genomic.fna.gz&quot;}{ftpdir=$0;asm=$10;file=asm&quot;_&quot;filesuffix;print ftpdir,file}&#39; &gt; complete_genomes.url
+head -5 complete_genomes.url &gt; selected_genomes.url
+wget $(cat selected_genomes.url)
+gunzip *.gz
+mv *.fna fna
+</pre></div>
+</div>
+<p><strong>Run orthofinder</strong></p>
+<p>To run orthofinder in 4 threads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snakemake</span> <span class="o">-</span><span class="n">j</span> <span class="mi">4</span> <span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">conda</span>
+</pre></div>
+</div>
+<p>Installation of prokka and orthofinder (performed during the first run only) and the analysis took 21m on a PC with i7 CPU.</p>
+<p>We have inferred orthogroups, they are located in <code class="docutils literal notranslate"><span class="pre">Results/Orthogroups.txt</span></code> file.</p>
+<p><strong>Download geneGraph console tools</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">gene_graph_lib</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DNKonanov</span><span class="o">/</span><span class="n">geneGraph</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p><strong>Build a graph representation of genomes</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">mpneumoniae</span><span class="o">/</span>
+<span class="n">cd</span> <span class="n">mpneumoniae</span><span class="o">/</span>
+<span class="n">cp</span> <span class="o">~/</span><span class="n">orthosnake</span><span class="o">/</span><span class="n">Results</span><span class="o">/</span><span class="n">Orthogroups</span><span class="o">.</span><span class="n">txt</span> <span class="o">.</span>
+<span class="n">python</span> <span class="o">~/</span><span class="n">geneGraph</span><span class="o">/</span><span class="n">gg</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="n">Orthogroups</span><span class="o">.</span><span class="n">txt</span> <span class="o">-</span><span class="n">o</span> <span class="n">mycoplasma_pneumoniae</span>
+</pre></div>
+</div>
+<p>Analysis should take about a minute.</p>
+<p><strong>Install GCB local web server</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">DNKonanov</span><span class="o">/</span><span class="n">GCB</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">GCB</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span> <span class="n">graphviz</span><span class="o">-</span><span class="n">dev</span> <span class="n">python3</span><span class="o">-</span><span class="n">graphviz</span> <span class="n">python3</span><span class="o">-</span><span class="n">pygraphviz</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>Copy data</strong>::</dt><dd><p>mkdir data
+cp -r ~/mpneumoniae/mycoplasma_pneumoniae/ data</p>
+</dd>
+</dl>
+<p><strong>Run local server</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">gcb_server</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Open <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in a web browser and work with GCB.</p>
 </div>
 </div>
 
@@ -231,6 +300,7 @@ We recomend using our <a class="reference external" href="https://github.com/par
 <li><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#complete-example">Complete example</a></li>
 </ul>
 </li>
 </ul>
