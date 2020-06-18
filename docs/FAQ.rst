@@ -57,12 +57,12 @@ What genome sets can be used in a standalone version?
 Can I use PC for the standalone analyisis or do I need a computational cluster?
 -------------------------------------------------------------------------------------------------------------------
 
-- In case of bacterial (not viral) genomes, it is recommended to run orthology inference on computational cluster. Analysis, downstream to orthgroups inference, can be run on standart PC. Local server application can be run on standart PC also.
+- In case of bacterial (not viral) genomes, it is recommended to run orthology inference on computational cluster. However, you may try it, and if orthogroups inference will be completed, then it is OK to continue the analysis. Local server application can be run on a standart PC.
 
 How many genomes may be analyzed in a standalone version?
 -------------------------------------------------------------------------------------------------------------------
 
-- It depends on computational resources you have. If you have a computational cluster, then hundreds of genomes will be OK in most cases. If you have problems running analysis for your project feel free to contact us, we will try to help you (e.g., we can run orthology inference on our side).
+- It depends on computational resources you have. If you have a computational cluster, then hundreds of genomes will be OK in most cases. If you have problems running analysis for your project feel free to contact us, we will try to help you (e.g., run orthology inference on our side).
 
 Can I adress someone to help me with my organisms?
 -------------------------------------------------------------------------------------------------------------------
