@@ -82,16 +82,18 @@ If genome files have extension, other than ``.fna`` (e.g., ``*.fasta``) , please
 
 Orthosnake pipeline performs the following steps:
 
-	* Fasta headers are modified, to satisfy the requirement of the Prokka:  
-		* symbols other than alphanumericals and `_` are converted to `_`
+	* Fasta headers are modified, to satisfy the requirement of the Prokka 
+
+		* symbols other than alphanumericals and '_' are converted to '_'
 		* if header is longer than 20 symbols, it is cropped to the first 18 symbols, and dots are added to the end (e.g., ``gi|15829254|ref|NC_002695.1`` becomes ``gi|15829254|ref|NC..``)
+
 	* Annotation with Prokka.
 	* Genebank files converted to amino acid fasta files.
 	* Orthogroups are inferred with OrthoFinder.
 
 When amino acid fasta files are generated from genebank files, information regarding location and product is included in headers in the following format: genome_name|numerical_id|start|end|product. Please note this if you want to perform orthogroups inference without using orthosnake.
 
-Building a graph and complexity estimation with a single command
+Building a graph and complexity estimation
 -----------------------------------------------------------------
 *INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format*
 

@@ -55,7 +55,7 @@
 
           
             
-            <img src="_static/logo3.png" class="logo" alt="Logo"/>
+            <img src="_static/logo4.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -89,7 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#roadmap">Roadmap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#orthogroup-inference">Orthogroup inference</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#building-a-graph-and-complexity-estimation-with-a-single-command">Building a graph and complexity estimation with a single command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-a-graph-and-complexity-estimation">Building a graph and complexity estimation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#local-gcb-server">Local GCB server</a><ul>
@@ -229,14 +229,14 @@ We recomend using our <a class="reference external" href="https://github.com/par
 </div>
 <p>Orthosnake pipeline performs the following steps:</p>
 <blockquote>
+<div><ul>
+<li><p>Fasta headers are modified, to satisfy the requirement of the Prokka</p>
+<blockquote>
 <div><ul class="simple">
-<li><dl class="simple">
-<dt>Fasta headers are modified, to satisfy the requirement of the Prokka:</dt><dd><ul>
-<li><p>symbols other than alphanumericals and <cite>_</cite> are converted to <cite>_</cite></p></li>
+<li><p>symbols other than alphanumericals and ‘_’ are converted to ‘_’</p></li>
 <li><p>if header is longer than 20 symbols, it is cropped to the first 18 symbols, and dots are added to the end (e.g., <code class="docutils literal notranslate"><span class="pre">gi|15829254|ref|NC_002695.1</span></code> becomes <code class="docutils literal notranslate"><span class="pre">gi|15829254|ref|NC..</span></code>)</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p>Annotation with Prokka.</p></li>
 <li><p>Genebank files converted to amino acid fasta files.</p></li>
@@ -245,8 +245,8 @@ We recomend using our <a class="reference external" href="https://github.com/par
 </div></blockquote>
 <p>When amino acid fasta files are generated from genebank files, information regarding location and product is included in headers in the following format: genome_name|numerical_id|start|end|product. Please note this if you want to perform orthogroups inference without using orthosnake.</p>
 </div>
-<div class="section" id="building-a-graph-and-complexity-estimation-with-a-single-command">
-<h3>Building a graph and complexity estimation with a single command<a class="headerlink" href="#building-a-graph-and-complexity-estimation-with-a-single-command" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="building-a-graph-and-complexity-estimation">
+<h3>Building a graph and complexity estimation<a class="headerlink" href="#building-a-graph-and-complexity-estimation" title="Permalink to this headline">¶</a></h3>
 <p><em>INPUT: orthogroups file `Orthogroups.txt` in OrthoFinder format</em></p>
 <p><em>OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text file)</em></p>
 <p>To perform the basic analysis, run:</p>
