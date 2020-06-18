@@ -36,7 +36,7 @@ Web server contains precalculated data for 143 prokaryote species. Standalone ve
 
 You can find screen recordings of GCB `here <https://www.youtube.com/playlist?list=PLba8uyARLwj1SK6iME73Biu-KE2NzcZR9>`_ (Youtube).
 
-Preprint is `available <https://www.biorxiv.org/content/10.1101/713123v1>`_ . Please cite it when reporting results obtained with the GCB.
+Preprint is `available <https://www.biorxiv.org/content/10.1101/713123v1>`_. Please cite it when reporting results obtained with the GCB.
 
 .. toctree::
 	:maxdepth: 3
