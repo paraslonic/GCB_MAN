@@ -11,13 +11,15 @@ Welcome to the Genome Complexity Browser (GCB) documentation.
 GCB is created to analyse variability in hundreds of prokaryote or viral genomes simultaniously.
 
 GCB performs:
+
 	- Visualization of gene neighborhoods in a graph-based format.
 	- Quantification of local genome variability. 
 
 .. figure:: img/scheme_of_things.png
    :align: center
 
-The graph-based visualization of gene neighbourhoods may facilitate answering questions like:
+
+The graph-based visualization may facilitate answering questions:
 
 	- Is a gene (operon) located in the same location in all genomes? If not, then what alternative genes are present?
 	- Which parts of a gene set (operon) are conserved and which are variable? 
@@ -25,6 +27,7 @@ The graph-based visualization of gene neighbourhoods may facilitate answering qu
 
 	
 Local genome variability profile may be used to identify:
+
 	- Hotspots of horizontal gene transfer or other local gene rearrangement events. 
 	- Cold spots, regions of the genome with virtually no changes in the considered set of genomes.
 
