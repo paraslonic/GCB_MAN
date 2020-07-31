@@ -55,11 +55,7 @@ When generating a subgraph, the nodes of the reference genome which are located 
 
 Even for small fragments of the genome (especially when they are highly variable), subgraphs may be too large for visualization and efficient analysis. We have implemented two filters to simplify subgraphs: a long path filter and a low weight edge filter. 
 
-**Depth filter**
-If the path begins and returns in the considered region of the genome, but its length is greater than the parameter ``Depth``, then it is formed up to fragments of length ``tails``. The same happens with all paths, they have only a beginning or only an end in the considered area.
-
-
-
+If the path begins and returns in the considered region of the genome, but its length is greater than the ``Depth`` parameter, then it is cropped up to fragments of length ``tails``. The same happens with all paths, which have only a beginning or only an end in the considered area. After applying the filter of long paths, a filter of low weight edges is applied, that is, such combinations of genes that occur in a small number of genomes. Edges weighing less than ``Minimal edge weight`` are excluded from the subgraph.
 
 
 Genome Complexity browsing
