@@ -44,10 +44,28 @@ To quantify this visual expression we implement an algorithm which counts the nu
 
 Regions of low and high complexity can be seen which corresponds to cold and hot spots of genome rearrangements, mainly due to the frequency of fixed horizontal gene transfer (HGT) events.
 
+Subgraph generation
+--------------------
+
+When generating a subgraph, the nodes of the reference genome which are located between the ``sart`` and ``end`` coordinates (set in b.p.). It is sometimes useful to expand the region of the genome under consideration, in this case, you can increase the value of the parameter ``Neighborhood`` (set in genes).
+
+.. image:: img/general/subgraphsheme.png
+        :alt: subgraph sheme
+        :align:   center
+
+Even for small fragments of the genome (especially when they are highly variable), subgraphs may be too large for visualization and efficient analysis. We have implemented two filters to simplify subgraphs: a long path filter and a low weight edge filter. 
+
+**Depth filter**
+If the path begins and returns in the considered region of the genome, but its length is greater than the parameter ``Depth``, then it is formed up to fragments of length ``tails``. The same happens with all paths, they have only a beginning or only an end in the considered area.
+
+
+
+
+
 Genome Complexity browsing
 ---------------------------
 
-We created GCB to analyze genome variability on two scales simultanously. Globally, the complexity profile of the whole genome is shown. Localy, some genome region is represented in a graph-based format. This combination creates a unique opportunity to "browse" genome variability: to find hotspots, to analyze gene contents and patterns in this hotspots, or to investigate the level of variability in the region in which the genes of interest to us are located.
+We created GCB to analyze genome variability on two scales simultanously. Globally, the complexity profile of the whole genome is shown. Localy, some genome region is represented in a graph-based format. This combination creates a unique opportunity to "browse" genome variability: to find hotspots, to analyze gene contents and patterns in this hotspots, or to investigate the level of variability in the region in which the genes of interest are located.
 
 Web browser alows surfing the Internet, our browser allows surfing genomes.
 
