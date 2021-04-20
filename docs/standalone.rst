@@ -100,7 +100,7 @@ Building a graph and complexity estimation
 To perform the basic analysis, you should install geneGraph::
 
 	git clone https://github.com/DNKonanov/geneGraph
-	mkdir geneGraph
+	cd geneGraph
 
 and run::
 
