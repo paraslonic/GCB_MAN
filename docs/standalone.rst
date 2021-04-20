@@ -231,7 +231,7 @@ To create conda environment for GCB and install *snakemake* into this environmen
 
 **Download orthosnake**
 
-Orthosnake will be needed to infere orthogroups.
+Orthosnake will be needed to infere orthogroups::
 
 	cd ~
 	git clone https://github.com/paraslonic/orthosnake.git
