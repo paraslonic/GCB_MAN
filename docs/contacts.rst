@@ -10,7 +10,7 @@ Aleksander Manolov, paraslonic@gmail.com
 
 Dmitriy Konanov, konanovdmitriy@gmail.com
 
-.. image:: img/logo_fish.png
+.. image:: img/logo_fish_gray.png
         :alt: logo
         :align:   center
-		:max-width: 30%
+		:width: 20%
