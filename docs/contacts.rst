@@ -13,4 +13,4 @@ Dmitriy Konanov, konanovdmitriy@gmail.com
 .. image:: img/logo_fish_gray.png
         :alt: logo
         :align:   center
-		:width: 20%
+		:width: 300
