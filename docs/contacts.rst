@@ -13,3 +13,4 @@ Dmitriy Konanov, konanovdmitriy@gmail.com
 .. image:: img/logo_fish.png
         :alt: logo
         :align:   center
+		:max-width: 30%
