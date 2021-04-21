@@ -27,20 +27,16 @@ Please refer to the `installation guide <https://docs.conda.io/projects/conda/en
 
 Installation instrctions are `here <https://snakemake.readthedocs.io/en/stable/getting_started/installation.html>`_.
 
-**Python 3.4 or later**
+**Python 3.6 or later**
 
 Comes with conda.
 
 **Graphviz and pygraphviz libraries**
 
-Can be installed by running::
-
-    sudo apt-get install graphviz python3-graphviz python3-pygraphviz
-
-or via conda::
+Can be installed via conda::
 	
 	conda install -c anaconda graphviz
-	conda install -c anaconda pygraphviz
+	conda install -c conda-forge pygraphviz==1.7
 
 **gene_graph_lib Python3 module**
 
@@ -99,7 +95,14 @@ Building a graph and complexity estimation
 
 *OUTPUT: graph-based representation of genomes (sqlite database), complexity values (text file)*
 
-To perform the basic analysis, run::
+
+
+To perform the basic analysis, you should install geneGraph::
+
+	git clone https://github.com/DNKonanov/geneGraph
+	cd geneGraph
+
+and run::
 
 	python3 gg.py -i [orthogroups file] -o [output] --reference [name of the reference genome]
 
@@ -138,7 +141,7 @@ What this command does:
 
 Main output files are:
 
-	- :file:`<output>.db` - SQLite database conatining graph and complexity values,  paralogues genes are skipped.
+	- :file:`<output>.db` - SQLite database containing graph and complexity values,  paralogues genes are skipped.
 	- :file:`<output>_pars.db` - SQLite database conatining graph and complexity values, paralogues genes are orthologized.
 	- :file:`[reference genome]/prob_window_complexity_contig_[contig].txt` - text file containing complexity values for each contig in the reference genome. 
 	- :file:`<output>_context.sif` - number of unique contexts, computed for each node in graph
@@ -153,15 +156,16 @@ Local GCB server
 Installation 
 -------------
 
-First, clone or donload git repository::
+First, clone or download git repository::
 
 	git clone https://github.com/DNKonanov/GCB.git
 
 Then, install dependencies::
 
-	sudo apt-get install graphviz graphviz-dev python3-graphviz python3-pygraphviz
 
 	pip3 install -r requirements.txt
+
+	conda install -c conda-forge graphviz pygraphviz==1.7
 
 	git clone https://github.com/paraslonic/orthosnake
 
@@ -227,7 +231,7 @@ To create conda environment for GCB and install *snakemake* into this environmen
 
 **Download orthosnake**
 
-Orthosnake will be needed to infere orthogroups.
+Orthosnake will be needed to infere orthogroups::
 
 	cd ~
 	git clone https://github.com/paraslonic/orthosnake.git
@@ -285,8 +289,8 @@ GCB application is needed to visualize genomes in a graph-based form. All datase
 	cd ~
 	git clone https://github.com/DNKonanov/GCB.git
 	cd GCB
-	sudo apt-get install graphviz graphviz-dev python3-graphviz python3-pygraphviz
 	pip3 install -r requirements.txt
+	conda install -c conda-forge graphviz pygraphviz==1.7
 
 **Copy results of geneGraph run into ``data`` folder**::
 
