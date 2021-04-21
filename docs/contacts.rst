@@ -9,3 +9,7 @@ Or directly, via e-mail:
 Aleksander Manolov, paraslonic@gmail.com
 
 Dmitriy Konanov, konanovdmitriy@gmail.com
+
+.. image:: img/logo_fish.png
+        :alt: logo
+        :align:   center
